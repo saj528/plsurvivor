@@ -1,0 +1,65 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map01.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "map01.tmx": {
+            "scale": 3.525390625,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 224.23047091412747,
+                "y": 259.4038781163435
+            }
+        },
+        "map01.tmx#spritesheetTileSet": {
+            "scaleInDock": 1
+        },
+        "map02.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 172.16666666666666,
+                "y": 263.16666666666663
+            }
+        },
+        "map02.tmx#spritesheet2": {
+            "scaleInDock": 1
+        },
+        "map03.tmx": {
+            "scale": 3.525390625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 242.66814404432137,
+                "y": 294.00997229916896
+            }
+        },
+        "map03.tmx#spritesheet3": {
+            "scaleInDock": 1
+        },
+        "spritesheet.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/ajmar/OneDrive/Desktop/JavaProjects/Libgdx/Rpg Prototype/assets/maps",
+    "map.height": 16,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 16,
+    "openFiles": [
+        "map01.tmx"
+    ],
+    "project": "rpgPrototype.tiled-project",
+    "recentFiles": [
+        "map01.tmx",
+        "map03.tmx",
+        "map02.tmx",
+        "spritesheet.tsx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx"
+}

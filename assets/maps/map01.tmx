@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="13">
+ <tileset firstgid="1" name="spritesheetTileSet" tilewidth="32" tileheight="32" tilecount="15" columns="15">
+  <image source="spritesheet.png" width="480" height="32"/>
+ </tileset>
+ <layer id="1" name="background" width="16" height="16">
+  <data encoding="csv">
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,7,2,7,7,7,7,2,2,7,2,2,2,
+2,2,2,2,2,2,7,7,7,7,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,13,2,2,2,2684354563,536870916,536870916,536870916,3221225475,2,2,13,2,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
+2,2,2,2,2,2,3,1610612740,1610612740,1610612740,1610612739,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,7,2,2,2,2,2,2,2,2,2,2,2,7,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+</data>
+ </layer>
+ <objectgroup id="2" name="collision">
+  <object id="1" x="202.503" y="171.55" width="135.862" height="136.613"/>
+  <object id="3" x="384.355" y="63.5391" width="30.3512" height="31.2022"/>
+  <object id="4" x="418.393" y="418.393" width="28.3657" height="28.3657"/>
+  <object id="5" x="33.4715" y="383.504" width="28.933" height="62.1208"/>
+  <object id="6" x="128.78" y="64.9573" width="29.7839" height="28.933"/>
+  <object id="7" x="192.603" y="64.39" width="126.227" height="61.5535"/>
+  <object id="9" name="oldMan" x="128.496" y="394.566" width="14.1828" height="15.4923"/>
+ </objectgroup>
+</map>
