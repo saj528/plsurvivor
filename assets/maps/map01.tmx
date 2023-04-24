@@ -2,34 +2,81 @@
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="13">
  <tileset firstgid="1" name="spritesheetTileSet" tilewidth="32" tileheight="32" tilecount="15" columns="15">
   <image source="spritesheet.png" width="480" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.183732" y="0.061244" width="31.6632" height="31.9694"/>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="7.83923" y="0.244976">
+     <polygon points="0,0 2.26603,15.801 8.14545,21.5579 20.4555,23.5177 23.9464,23.7014 23.9464,-0.30622"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="3">
+   <objectgroup draworder="index" id="3">
+    <object id="2" x="8.14545" y="32.1531">
+     <polygon points="0,0 -0.183732,-32.0919 23.6402,-32.0306 23.8852,-0.244976"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="4">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="27.2536" y="-0.061244">
+     <polygon points="0,0 4.47081,5.32823 4.5933,31.8469 -27.1923,31.9694 -27.2536,0.122488"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="5">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.30813" y="10.289">
+     <polygon points="0,0 5.69569,-8.02297 9.24785,-8.14545 15.311,-2.0823 13.6574,15.6172 2.14354,15.4947 -0.122488,9.1866"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="6">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.244976" y="0" width="31.7856" height="32.0306"/>
+   </objectgroup>
+  </tile>
+  <tile id="7">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="12.3713" y="10.534" width="9.24785" height="14.6373"/>
+   </objectgroup>
+  </tile>
+  <tile id="8">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.30813" y="7.28804" width="21.1904" height="21.0679"/>
+   </objectgroup>
+  </tile>
+  <tile id="11">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="14" y="22">
+     <polygon points="0,0 0,-10 2,-10 2,-12 4,-12 4,0"/>
+    </object>
+   </objectgroup>
+  </tile>
  </tileset>
  <layer id="1" name="background" width="16" height="16">
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-2,2,2,2,7,2,7,7,7,7,2,2,7,2,2,2,
-2,2,2,2,2,2,7,7,7,7,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-2,2,13,2,2,2,2684354563,536870916,536870916,536870916,3221225475,2,2,13,2,2,
-2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
-2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
-2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,2,2,
-2,2,2,2,2,2,3,1610612740,1610612740,1610612740,1610612739,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,7,7,7,7,7,7,2,2,7,2,2,2,
+2,12,12,2,7,7,7,7,7,7,2,2,2,2,2,2,
+2,12,12,2,7,7,7,7,7,7,2,2,2,2,2,2,
+2,2,13,2,2,2,2684354563,536870916,536870916,536870916,3221225475,2,2,13,13,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,13,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,13,2,
+2,2,13,2,2,2,4,1,1,1,2147483652,2,2,13,13,2,
+2,2,2,7,2,2,3,1610612740,1610612740,1610612740,1610612739,2,2,13,13,2,
+2,2,2,2,2,2,2,2,2,2,2,2,2,13,13,2,
+2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,
 2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 2,7,2,2,2,2,2,2,2,2,2,2,2,7,2,2,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+2,2,2,2,6,2,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
 </data>
  </layer>
- <objectgroup id="2" name="collision">
-  <object id="1" x="202.503" y="171.55" width="135.862" height="136.613"/>
-  <object id="3" x="384.355" y="63.5391" width="30.3512" height="31.2022"/>
-  <object id="4" x="418.393" y="418.393" width="28.3657" height="28.3657"/>
-  <object id="5" x="33.4715" y="383.504" width="28.933" height="62.1208"/>
-  <object id="6" x="128.78" y="64.9573" width="29.7839" height="28.933"/>
-  <object id="7" x="192.603" y="64.39" width="126.227" height="61.5535"/>
-  <object id="9" name="oldMan" x="128.496" y="394.566" width="14.1828" height="15.4923"/>
- </objectgroup>
+ <objectgroup id="2" name="collision"/>
 </map>

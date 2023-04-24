@@ -7,13 +7,17 @@
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInEditor": 4
+        },
         "map01.tmx": {
             "scale": 3.525390625,
-            "selectedLayer": 1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 224.23047091412747,
-                "y": 259.4038781163435
+                "x": 230.6127423822715,
+                "y": 278.1252077562327
             }
         },
         "map01.tmx#spritesheetTileSet": {

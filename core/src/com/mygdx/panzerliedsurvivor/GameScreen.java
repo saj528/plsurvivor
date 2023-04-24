@@ -15,25 +15,29 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.panzerliedsurvivor.components.CharacterEntity;
 
+import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
+
 public class GameScreen implements Screen {
 
-
+    private final float SCALE = 1.0f;
     private OrthographicCamera camera;
-    private OrthographicCamera hudCamera;
     private Viewport viewport;
-    private Viewport hudViewport;
 
     private SpriteBatch batch;
 
     SpriteProcessor spriteProcessor;
 
     ShapeRenderer shapeRenderer;
+
+    private Box2DDebugRenderer box2DDebugRenderer;
 
     Player player;
 
@@ -48,28 +52,21 @@ public class GameScreen implements Screen {
 
     private TiledMap map;
 
-    private CharacterEntity oldMan;
-
-    private TextureRegion textBoxTexReg;
-
-    BitmapFont font = new BitmapFont();
-
+    private World world;
 
     public GameScreen() {
 
         shapeRenderer = new ShapeRenderer();
 
+        box2DDebugRenderer = new Box2DDebugRenderer();
+
         camera = new OrthographicCamera();
-        hudCamera = new OrthographicCamera();
 
         camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
-        hudCamera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+
+        world = new World(new Vector2(0, 0), false);
 
         viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        hudViewport = new ScreenViewport(hudCamera);
-
-
-        hudCamera.setToOrtho(false, 1920,1080);
 
         spriteProcessor = new SpriteProcessor();
 
@@ -81,15 +78,12 @@ public class GameScreen implements Screen {
 
         mapObjects = map.getLayers().get("collision").getObjects();
 
-        player = new Player(batch, spriteProcessor, mapObjects);
+        player = new Player(batch, spriteProcessor, mapObjects,createBox(2,2,8,8,false));
+        createBox(50,50,50,50,true);
+        createBox(150,150,50,50,false);
 
-        float oldmanX = (float) mapObjects.get("oldMan").getProperties().get("x");
-        float oldmanY = (float) mapObjects.get("oldMan").getProperties().get("y");
 
-        oldMan = new CharacterEntity(spriteProcessor.getNpcTextureRegions().get("oldMan"),"oldMan", new Rectangle((float) mapObjects.get("oldMan").getProperties().get("x"),(float) mapObjects.get("oldMan").getProperties().get("y"),16,16));
-        textBoxTexReg = spriteProcessor.getHudTextureRegions().get("textBox");
-        font.getData().setScale(8);
-        font.setColor(Color.BLACK);
+
     }
 
     @Override
@@ -102,71 +96,58 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        world.step(1 / 60f, 6, 2);
+
         camera.update();
 
-
-        if (Math.abs(player.getPlayerBoundingBox().x - camera.position.x) > 2 || Math.abs(player.getPlayerBoundingBox().y - camera.position.y) > 2) {
-            Vector3 targetPosition = new Vector3(player.getPlayerBoundingBox().x, player.getPlayerBoundingBox().y, 0);
+        System.out.println((player.getPlayerBody().getPosition().x * PPM));
+        if (Math.abs((player.getPlayerBody().getPosition().x * PPM) - camera.position.x) > 2|| Math.abs((player.getPlayerBody().getPosition().y * PPM) - camera.position.y) > 2) {
+            Vector3 targetPosition = new Vector3((player.getPlayerBody().getPosition().x * PPM), (player.getPlayerBody().getPosition().y * PPM), 0);
             camera.position.lerp(targetPosition, CAMERA_LERP_SPEED);
         }
 
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
         batch.setProjectionMatrix(camera.combined);
-        shapeRenderer.setProjectionMatrix(camera.combined);
-
 
         player.detectInput(delta);
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 1, 0.1f);
-        shapeRenderer.rect(player.getPlayerBoundingBox().x, player.getPlayerBoundingBox().y, player.getPlayerBoundingBox().width, player.getPlayerBoundingBox().height);
-
-        shapeRenderer.setColor(0, 1, 0, 0.1f);
-        shapeRenderer.rect(player.getPlayerUseBox().x, player.getPlayerUseBox().y, player.getPlayerUseBox().width, player.getPlayerUseBox().height);
-
-        shapeRenderer.setColor(0, 0.5f, 0.5f, 0.1f);
-        shapeRenderer.rect(oldMan.getBoundingBox().x, oldMan.getBoundingBox().y, oldMan.getBoundingBox().width, oldMan.getBoundingBox().height);
-        shapeRenderer.end();
-
         batch.begin();
-
-        batch.draw(oldMan.getCharacterTexReg(),oldMan.getBoundingBox().getX(),oldMan.getBoundingBox().getY());
 
         player.renderAndUpdate(delta);
 
-
         batch.end();
 
-        batch.setProjectionMatrix(hudCamera.combined);
-        batch.begin();
-        if(player.isPlayerUsing() && player.getPlayerUseBox().overlaps(oldMan.getBoundingBox())){
-            batch.draw(textBoxTexReg,textBoxTexReg.getRegionWidth() / 2,0,textBoxTexReg.getRegionWidth() * 7,textBoxTexReg.getRegionHeight() * 7);
-            font.draw(batch, "Hello, world!",Gdx.graphics.getWidth() / 6 , Gdx.graphics.getHeight() / 6);
+        box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
-        }else{
-            player.setPlayerUsing(false);
-        }
-
-        batch.end();
 
     }
 
-    private void prepareHUD() {
-        //Create a BitmapFont from our font file
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("EdgeOfTheGalaxyRegular-OVEa6.otf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+    public Body createBox(int x,int y,int width, int height, boolean isStatic) {
+        Body boxBody;
 
-        fontParameter.size = 72;
-        fontParameter.borderWidth = 3.6f;
-        fontParameter.color = new Color(1, 1, 1, 0.3f);
-        fontParameter.borderColor = new Color(0, 0, 0, 0.3f);
+        BodyDef def = new BodyDef();
+        if(isStatic){
+            def.type = BodyDef.BodyType.StaticBody;
+        }else{
+            def.type = BodyDef.BodyType.DynamicBody;
+        }
+        def.position.set(x / PPM,y / PPM);
+        def.fixedRotation = true;
+        boxBody = world.createBody(def);
 
-        font = fontGenerator.generateFont(fontParameter);
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.setAsBox(width / SCALE / PPM, height / SCALE / PPM);
 
-        //scale the font to fit world
-        font.getData().setScale(0.08f);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density =  1f;
+        fixtureDef.friction = 1f;
+        fixtureDef.shape = polygonShape;
 
+        boxBody.createFixture(fixtureDef);
+        polygonShape.dispose();
+
+        return boxBody;
     }
 
 
