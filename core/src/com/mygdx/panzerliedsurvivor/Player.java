@@ -75,7 +75,7 @@ public class Player {
             isPlayerUsing = true;
         }
 
-        float speed = 48f;
+        float speed = 10f;
 /*        for (RectangleMapObject rectangleObject : mapObjects.getByType(RectangleMapObject.class)) {
             Rectangle rectangle = rectangleObject.getRectangle();
             if (Intersector.overlaps(rectangle, playerBoundingBox)) {
@@ -121,7 +121,7 @@ public class Player {
                 currentAnimation = spriteProcessor.getAnimations().get("playerIdleLeft");
             }
         }
-        playerBody.setLinearVelocity(new Vector2(horizontalForce,verticalForce));
+        playerBody.setLinearVelocity(new Vector2(horizontalForce * speed,verticalForce * speed));
 
     }
 
