@@ -27,10 +27,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.panzerliedsurvivor.components.CharacterEntity;
 
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
+import static com.mygdx.panzerliedsurvivor.utils.TiledObjectUtil.parseMap;
+import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.*;
 
 public class GameScreen implements Screen {
 
-    private final float SCALE = 1.0f;
     private OrthographicCamera camera;
     private Viewport viewport;
 
@@ -48,7 +49,6 @@ public class GameScreen implements Screen {
     private final float WORLD_WIDTH = playerSize * 15;
     private final float WORLD_HEIGHT = playerSize * 15;
     private static final float CAMERA_LERP_SPEED = 0.1f;
-    private final int tileSize;
 
     MapObjects mapObjects;
 
@@ -79,102 +79,20 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
 
         map = new TmxMapLoader().load("maps/map01.tmx");
-        tileSize = ((TiledMapTileLayer) map.getLayers().get(0)).getTileWidth();
+
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
-        //mapObjects = map.getLayers().get("collision").getObjects();
-
-        player = new Player(batch, spriteProcessor, mapObjects,createBox(2,2,8,8,false));
 
 
-        parseMap();
+        player = new Player(batch, spriteProcessor, mapObjects, createBox(world,2,2,8,8,false));
 
 
-        Rectangle rectangle = new Rectangle(0,0,32,32);
-
-
-        BodyDef bodyDef = getBodyDef(1f,1f);
-
-        Body body = world.createBody(bodyDef);
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(rectangle.getWidth() / 2.0f / PPM, rectangle.getHeight() / 2.0f / PPM);
-        body.createFixture(polygonShape, 0.0f);
-        polygonShape.dispose();
-
+        parseMap(map, world);
 
     }
 
-    private void parseMap()
-    {
-        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
-        for (int x = 0; x < layer.getWidth(); x++)
-        {
-            for (int y = 0; y < layer.getHeight(); y++)
-            {
-                TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                if (cell == null)
-                    continue;
 
-                MapObjects cellObjects = cell.getTile().getObjects();
-                if (cellObjects.getCount() != 1)
-                    continue;
 
-                MapObject mapObject = cellObjects.get(0);
-
-                if (mapObject instanceof RectangleMapObject)
-                {
-                    RectangleMapObject rectangleObject = (RectangleMapObject) mapObject;
-                    Rectangle rectangle = rectangleObject.getRectangle();
-
-                    BodyDef bodyDef = getBodyDef((x * tileSize + tileSize / 2f + rectangle.getX() - (tileSize - rectangle.getWidth()) / 2f) / PPM, (y * tileSize + tileSize / 2f + rectangle.getY() - (tileSize - rectangle.getHeight()) / 2f) / PPM);
-
-                    Body body = world.createBody(bodyDef);
-                    PolygonShape polygonShape = new PolygonShape();
-                    polygonShape.setAsBox(rectangle.getWidth() / 2.0f / PPM, rectangle.getHeight() / 2.0f / PPM);
-                    body.createFixture(polygonShape, 0.0f);
-                    polygonShape.dispose();
-                }
-                else if (mapObject instanceof EllipseMapObject)
-                {
-                    EllipseMapObject circleMapObject = (EllipseMapObject) mapObject;
-                    Ellipse ellipse = circleMapObject.getEllipse();
-
-                    BodyDef bodyDef = getBodyDef(x * tileSize + tileSize / 2f + ellipse.x, y * tileSize + tileSize / 2f + ellipse.y);
-
-                    if (ellipse.width != ellipse.height)
-                        throw new IllegalArgumentException("Only circles are allowed.");
-
-                    Body body = world.createBody(bodyDef);
-                    CircleShape circleShape = new CircleShape();
-                    circleShape.setRadius(ellipse.width / 2f);
-                    body.createFixture(circleShape, 0.0f);
-                    circleShape.dispose();
-                }
-                else if (mapObject instanceof PolygonMapObject)
-                {
-                    PolygonMapObject polygonMapObject = (PolygonMapObject) mapObject;
-                    Polygon polygon = polygonMapObject.getPolygon();
-
-                    BodyDef bodyDef = getBodyDef(x * tileSize + polygon.getX(), y * tileSize + polygon.getY());
-
-                    Body body = world.createBody(bodyDef);
-                    PolygonShape polygonShape = new PolygonShape();
-                    polygonShape.set(polygon.getVertices());
-                    body.createFixture(polygonShape, 0.0f);
-                    polygonShape.dispose();
-                }
-            }
-        }
-    }
-
-    private BodyDef getBodyDef(float x, float y)
-    {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(x, y);
-
-        return bodyDef;
-    }
 
     @Override
     public void show() {
@@ -211,34 +129,6 @@ public class GameScreen implements Screen {
 
 
     }
-
-    public Body createBox(int x,int y,int width, int height, boolean isStatic) {
-        Body boxBody;
-
-        BodyDef def = new BodyDef();
-        if(isStatic){
-            def.type = BodyDef.BodyType.StaticBody;
-        }else{
-            def.type = BodyDef.BodyType.DynamicBody;
-        }
-        def.position.set(x / PPM,y / PPM);
-        def.fixedRotation = true;
-        boxBody = world.createBody(def);
-
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(width / SCALE / PPM, height / SCALE / PPM);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.density =  1f;
-        fixtureDef.friction = 1f;
-        fixtureDef.shape = polygonShape;
-
-        boxBody.createFixture(fixtureDef);
-        polygonShape.dispose();
-
-        return boxBody;
-    }
-
 
     @Override
     public void resize(int width, int height) {
