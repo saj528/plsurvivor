@@ -56,6 +56,11 @@ public class TiledObjectUtil {
 
     public static void parseMap(TiledMap map, World world)
     {
+
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.TERRAIN_CATEGORY_BITS;
+        filter.maskBits = Constants.TERRAIN_MASK_BITS;
+
         int tileSize = ((TiledMapTileLayer) map.getLayers().get(0)).getTileWidth();
 
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
@@ -84,6 +89,7 @@ public class TiledObjectUtil {
                     PolygonShape polygonShape = new PolygonShape();
                     polygonShape.setAsBox(rectangle.getWidth() / 2.0f / PPM, rectangle.getHeight() / 2.0f / PPM);
                     body.createFixture(polygonShape, 0.0f);
+                    body.getFixtureList().get(0).setFilterData(filter);
                     polygonShape.dispose();
                 }
                 else if (mapObject instanceof EllipseMapObject)
@@ -100,6 +106,7 @@ public class TiledObjectUtil {
                     CircleShape circleShape = new CircleShape();
                     circleShape.setRadius(ellipse.width / 2f);
                     body.createFixture(circleShape, 0.0f);
+                    body.getFixtureList().get(0).setFilterData(filter);
                     circleShape.dispose();
                 }
                 else if (mapObject instanceof PolygonMapObject)
@@ -113,6 +120,7 @@ public class TiledObjectUtil {
                     PolygonShape polygonShape = new PolygonShape();
                     polygonShape.set(polygon.getVertices());
                     body.createFixture(polygonShape, 0.0f);
+                    body.getFixtureList().get(0).setFilterData(filter);
                     polygonShape.dispose();
                 }
             }

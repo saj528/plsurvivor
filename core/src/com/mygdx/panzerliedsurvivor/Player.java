@@ -6,14 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.panzerliedsurvivor.weapons.SimpleWeapon;
+import com.mygdx.panzerliedsurvivor.weapons.Weapon;
+
+import java.util.ArrayList;
 
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 
@@ -43,6 +42,8 @@ public class Player {
 
     private boolean isPlayerUsing = false;
 
+    private ArrayList<Weapon> weapons;
+
     public Player(SpriteBatch batch, SpriteProcessor spriteProcessor, MapObjects mapObjects,Body playerBody) {
 
         this.batch = batch;
@@ -60,11 +61,18 @@ public class Player {
         direction = "down";
 
         walkingTimer = 0;
+
+        weapons = new ArrayList<>();
+        weapons.add(new SimpleWeapon(3f, null, 10, 10, this));
     }
 
     public void renderAndUpdate(float delta) {
         walkingTimer += delta;
         batch.draw(currentAnimation.getKeyFrame(walkingTimer, true), playerBody.getPosition().x * PPM - 8, playerBody.getPosition().y * PPM - 16);
+
+        for(Weapon weapon : weapons) {
+            weapon.update(delta);
+        }
 
     }
 
