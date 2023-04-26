@@ -2,33 +2,25 @@ package com.mygdx.panzerliedsurvivor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.EllipseMapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.*;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.panzerliedsurvivor.components.CharacterEntity;
+import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
+import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 
+import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayer;
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.TiledObjectUtil.parseMap;
-import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.*;
 
 public class GameScreen implements Screen {
 
@@ -70,7 +62,7 @@ public class GameScreen implements Screen {
 
         camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
-        world = new World(new Vector2(0, 0), false);
+        world = GameComponentProvider.getGameWorld();
 
         viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 
@@ -84,7 +76,7 @@ public class GameScreen implements Screen {
 
 
 
-        player = new Player(batch, spriteProcessor, mapObjects, createBox(world,2,2,8,8,false));
+        player = new Player(batch, spriteProcessor, mapObjects, createPlayer(2,2,8,8));
 
 
         parseMap(map, world);
@@ -122,6 +114,11 @@ public class GameScreen implements Screen {
         batch.begin();
 
         player.renderAndUpdate(delta);
+
+        for(Bullet b : GameComponentProvider.getBullets()) {
+            b.update(delta);
+            b.render(delta);
+        }
 
         batch.end();
 
