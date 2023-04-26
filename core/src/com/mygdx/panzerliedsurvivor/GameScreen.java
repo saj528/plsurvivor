@@ -68,7 +68,7 @@ public class GameScreen implements Screen {
 
         spriteProcessor = new SpriteProcessor();
 
-        batch = new SpriteBatch();
+        batch = GameComponentProvider.getSpriteBatch();
 
         map = new TmxMapLoader().load("maps/map01.tmx");
 

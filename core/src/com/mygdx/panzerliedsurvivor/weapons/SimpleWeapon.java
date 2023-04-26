@@ -7,6 +7,8 @@ import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 import java.util.Random;
 
+import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.*;
+
 public class SimpleWeapon extends Weapon {
 
     private float projectileSpeed = 0.25f;
@@ -26,7 +28,7 @@ public class SimpleWeapon extends Weapon {
 
     private void fire() {
         Random random = new Random();
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(random.nextFloat(2) - 1, random.nextFloat(2) - 1), projectileSpeed, 10, null);
-        GameComponentProvider.addBullet(bullet);
+        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(random.nextFloat(2) - 1, random.nextFloat(2) - 1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        addBullet(bullet);
     }
 }
