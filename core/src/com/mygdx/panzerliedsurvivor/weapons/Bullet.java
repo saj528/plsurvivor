@@ -53,8 +53,10 @@ public class Bullet {
         angle = direction.angleDeg();
         rotatedTexture = new Sprite(bulletTexReg);
         rotatedTexture.flip(true, false);
-        rotatedTexture.setPosition(startPosition.x * Constants.PPM, startPosition.y * Constants.PPM);
+        rotatedTexture.setOrigin(rotatedTexture.getWidth() / 2, rotatedTexture.getHeight() / 2);
         rotatedTexture.setRotation(angle);
+        rotatedTexture.setPosition((startPosition.x - .1f) * Constants.PPM, startPosition.y * Constants.PPM);
+
 
     }
 
