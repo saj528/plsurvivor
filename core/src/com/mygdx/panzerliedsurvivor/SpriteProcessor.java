@@ -1,5 +1,6 @@
 package com.mygdx.panzerliedsurvivor;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,22 +22,18 @@ public class SpriteProcessor {
 
     private HashMap<String,Animation<TextureRegion>> animations;
 
-    private HashMap<String,TextureRegion> npcTextureRegions;
-
-    private HashMap<String,TextureRegion> hudTextureRegions;
+    private HashMap<String,TextureRegion> miscTextureRegions;
 
     public SpriteProcessor() {
 
         animations = new HashMap<>();
-        npcTextureRegions = new HashMap<>();
-        hudTextureRegions = new HashMap<>();
-
+        miscTextureRegions = new HashMap<>();
 
         textureAtlas = new TextureAtlas("player_atlas.atlas");
 
-        npcTextureRegions.put("oldMan",textureAtlas.findRegion("walking_down4"));
+        Texture bulletTexture = new Texture("bullet.png");
 
-        hudTextureRegions.put("textBox",textureAtlas.findRegion("textBox"));
+        miscTextureRegions.put("bullet",new TextureRegion(bulletTexture));
 
         playerWalkingDownTexReg = createSpriteTextureRegion("walking_down", 1, 4);
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);
@@ -89,11 +86,7 @@ public class SpriteProcessor {
         return animations;
     }
 
-    public HashMap<String, TextureRegion> getNpcTextureRegions() {
-        return npcTextureRegions;
-    }
-
-    public HashMap<String, TextureRegion> getHudTextureRegions() {
-        return hudTextureRegions;
+    public HashMap<String, TextureRegion> getMiscTextureRegions() {
+        return miscTextureRegions;
     }
 }

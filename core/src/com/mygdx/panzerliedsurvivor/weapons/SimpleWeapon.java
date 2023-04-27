@@ -7,9 +7,11 @@ import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 import java.util.Random;
 
+import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.*;
+
 public class SimpleWeapon extends Weapon {
 
-    private float projectileSpeed = 0.25f;
+    private float projectileSpeed = 0.05f;
 
     public SimpleWeapon(float attackSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
         super(attackSpeed, sprite, damage, projectileDurability, player);
@@ -26,7 +28,22 @@ public class SimpleWeapon extends Weapon {
 
     private void fire() {
         Random random = new Random();
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(random.nextFloat(2) - 1, random.nextFloat(2) - 1), projectileSpeed, 10, null);
-        GameComponentProvider.addBullet(bullet);
+        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, 0), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet1 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, 0), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet2 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(0, 1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet3 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(0, -1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet4 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, 1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet5 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, -1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet6 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, 1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet7 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, -1), projectileSpeed, 10, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        addBullet(bullet);
+        addBullet(bullet1);
+        addBullet(bullet2);
+        addBullet(bullet3);
+        addBullet(bullet4);
+        addBullet(bullet5);
+        addBullet(bullet6);
+        addBullet(bullet7);
+
     }
 }
