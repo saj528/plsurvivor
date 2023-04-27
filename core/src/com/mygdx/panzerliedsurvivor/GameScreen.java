@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
@@ -23,7 +21,7 @@ import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 
 import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayer;
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
-import static com.mygdx.panzerliedsurvivor.utils.TiledObjectUtil.parseMap;
+import static com.mygdx.panzerliedsurvivor.utils.TiledObjectUtil.parseMapLayerCollision;
 
 public class GameScreen implements Screen {
 
@@ -85,7 +83,7 @@ public class GameScreen implements Screen {
 
         GameComponentProvider.setPlayer(player);
 
-        parseMap(map, world);
+        parseMapLayerCollision(map, world);
 
     }
 
