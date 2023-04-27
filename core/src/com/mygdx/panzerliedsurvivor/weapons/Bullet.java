@@ -1,6 +1,5 @@
 package com.mygdx.panzerliedsurvivor.weapons;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -22,9 +21,6 @@ public class Bullet {
     float durability;
 
     TextureRegion bulletTexReg;
-
-    float offsetX = .12f;
-    float offsetY = .08f;
 
     float angle;
     Sprite rotatedTexture;
@@ -53,15 +49,16 @@ public class Bullet {
         angle = direction.angleDeg();
         rotatedTexture = new Sprite(bulletTexReg);
         rotatedTexture.flip(true, false);
-        rotatedTexture.setOrigin(rotatedTexture.getWidth() / 2, rotatedTexture.getHeight() / 2);
+//        rotatedTexture.setOrigin(rotatedTexture.getWidth() / 2, rotatedTexture.getHeight() / 2);
+        rotatedTexture.setOriginCenter();
         rotatedTexture.setRotation(angle);
-        rotatedTexture.setPosition((startPosition.x - .1f) * Constants.PPM, startPosition.y * Constants.PPM);
+        rotatedTexture.setPosition(((startPosition.x) * Constants.PPM) - (rotatedTexture.getWidth() / 2), (startPosition.y * Constants.PPM) - (rotatedTexture.getHeight() / 2));
 
 
     }
 
     public void update(float delta) {
-        rotatedTexture.setPosition((body.getPosition().x - offsetX) * Constants.PPM, (body.getPosition().y - offsetY) * Constants.PPM);
+        rotatedTexture.setPosition(((body.getPosition().x) * Constants.PPM) - (rotatedTexture.getWidth() / 2), ((body.getPosition().y) * Constants.PPM) - (rotatedTexture.getHeight() / 2));
     }
 
     public void render(float delta) {
