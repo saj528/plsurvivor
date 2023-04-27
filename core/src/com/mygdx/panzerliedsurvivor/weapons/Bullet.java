@@ -40,6 +40,7 @@ public class Bullet {
      * @param bulletTexReg the region of the sprite map for the bullet's sprite
      */
     public Bullet(int damage, Vector2 startPosition, Vector2 direction, float speed, float durability, TextureRegion bulletTexReg) {
+
         this.damage = damage;
         this.direction = direction;
         this.speed = speed;
@@ -51,8 +52,8 @@ public class Bullet {
         this.body.applyLinearImpulse(direction.setLength(speed), this.body.getPosition(), true);
         angle = direction.angleDeg();
         rotatedTexture = new Sprite(bulletTexReg);
-        rotatedTexture.flip(true,false);
-        rotatedTexture.setPosition(startPosition.x * Constants.PPM, startPosition.y  * Constants.PPM);
+        rotatedTexture.flip(true, false);
+        rotatedTexture.setPosition(startPosition.x * Constants.PPM, startPosition.y * Constants.PPM);
         rotatedTexture.setRotation(angle);
 
     }
