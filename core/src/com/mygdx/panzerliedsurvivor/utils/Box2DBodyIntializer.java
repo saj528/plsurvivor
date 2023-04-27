@@ -2,6 +2,7 @@ package com.mygdx.panzerliedsurvivor.utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 
@@ -37,7 +38,18 @@ public class Box2DBodyIntializer {
         return playerBody;
     }
 
-    public static Body createBox(int x, int y, int width, int height, boolean isStatic) {
+    public static Body createEnemyBody(Enemy enemy, float x, float y) {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.ENEMY_CATEGORY_BITS;
+        filter.maskBits = Constants.ENEMY_MASK_BITS;
+
+        Body enemyBody = createBox(x, y, enemy.getWidth(), enemy.getHeight(), false);
+        enemyBody.getFixtureList().get(0).setFilterData(filter);
+
+        return enemyBody;
+    }
+
+    public static Body createBox(float x, float y, float width, float height, boolean isStatic) {
         Body boxBody;
 
         World world = GameComponentProvider.getGameWorld();

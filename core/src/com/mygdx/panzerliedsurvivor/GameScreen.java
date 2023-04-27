@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 
@@ -80,6 +81,9 @@ public class GameScreen implements Screen {
 
         player = new Player(batch, spriteProcessor, mapObjects, createPlayer(2,2,8,8));
 
+        Enemy.createEnemy(Enemy.EnemyType.SimpleEnemy, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+
+        GameComponentProvider.setPlayer(player);
 
         parseMap(map, world);
 
@@ -120,6 +124,11 @@ public class GameScreen implements Screen {
         for(Bullet b : GameComponentProvider.getBullets()) {
             b.update(delta);
             b.render(delta);
+        }
+
+        for(Enemy enemy : GameComponentProvider.getEnemies()) {
+            enemy.update(delta);
+            enemy.render(delta);
         }
 
         batch.end();
