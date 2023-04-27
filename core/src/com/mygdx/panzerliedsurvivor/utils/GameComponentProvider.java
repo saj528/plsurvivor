@@ -3,8 +3,10 @@ package com.mygdx.panzerliedsurvivor.utils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.SpriteProcessor;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
+import com.mygdx.panzerliedsurvivor.Player;
 
 import java.util.ArrayList;
 
@@ -19,6 +21,10 @@ public class GameComponentProvider {
     private static SpriteProcessor spriteProcessor;
 
     private static ArrayList<Bullet> bullets = new ArrayList<>();
+
+    private static ArrayList<Enemy> enemies = new ArrayList<>();
+
+    private static Player player;
 
     public static World getGameWorld() {
 
@@ -51,5 +57,21 @@ public class GameComponentProvider {
 
     public static void addBullet(Bullet bullet) {
         bullets.add(bullet);
+    }
+
+    public static ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public static void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+
+    public static void setPlayer(Player player) {
+        GameComponentProvider.player = player;
+    }
+
+    public static Player getPlayer() {
+        return player;
     }
 }
