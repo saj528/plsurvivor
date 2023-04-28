@@ -3,6 +3,7 @@ package com.mygdx.panzerliedsurvivor.weapons;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.panzerliedsurvivor.Player;
 
+// TODO - refactor like how Enemy is
 public abstract class Weapon {
     float attackSpeed;
 
