@@ -3,12 +3,15 @@ package com.mygdx.panzerliedsurvivor.utils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.panzerliedsurvivor.components.GameContactListener;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.SpriteProcessor;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 import com.mygdx.panzerliedsurvivor.Player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /***
  * This class provides certain game components that are used across the application (e.g. game world),
@@ -20,9 +23,13 @@ public class GameComponentProvider {
     private static SpriteBatch spriteBatch;
     private static SpriteProcessor spriteProcessor;
 
-    private static ArrayList<Bullet> bullets = new ArrayList<>();
+    private static Set<Bullet> bullets = new HashSet<>();
 
-    private static ArrayList<Enemy> enemies = new ArrayList<>();
+    private static Set<Bullet> bulletsToDelete = new HashSet<>();
+
+    private static Set<Enemy> enemies = new HashSet<>();
+
+    private static Set<Enemy> enemiesToDelete = new HashSet<>();
 
     private static Player player;
 
@@ -30,6 +37,7 @@ public class GameComponentProvider {
 
         if (gameWorld == null) {
             gameWorld = new World(new Vector2(0, 0), false);
+            gameWorld.setContactListener(new GameContactListener());
         }
         return gameWorld;
     }
@@ -51,7 +59,7 @@ public class GameComponentProvider {
         return spriteProcessor;
     }
 
-    public static ArrayList<Bullet> getBullets() {
+    public static Set<Bullet> getBullets() {
         return bullets;
     }
 
@@ -59,12 +67,20 @@ public class GameComponentProvider {
         bullets.add(bullet);
     }
 
-    public static ArrayList<Enemy> getEnemies() {
+    public static void deleteBullet(Bullet bullet) {
+        bulletsToDelete.add(bullet);
+    }
+
+    public static Set<Enemy> getEnemies() {
         return enemies;
     }
 
     public static void addEnemy(Enemy enemy) {
         enemies.add(enemy);
+    }
+
+    public static void deleteEnemy(Enemy enemy) {
+        enemiesToDelete.add(enemy);
     }
 
     public static void setPlayer(Player player) {
@@ -73,5 +89,19 @@ public class GameComponentProvider {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    public static void cleanObjects() {
+        for(Enemy enemy : enemiesToDelete) {
+            gameWorld.destroyBody(enemy.getBody());
+        }
+        enemies.removeAll(enemiesToDelete);
+        enemiesToDelete.clear();
+
+        for(Bullet bullet : bulletsToDelete) {
+            gameWorld.destroyBody(bullet.getBody());
+        }
+        bullets.removeAll(bulletsToDelete);
+        bulletsToDelete.clear();
     }
 }

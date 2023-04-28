@@ -88,6 +88,7 @@ public class GameScreen implements Screen {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
         player = new Player(batch, spriteProcessor, mapObjects, createPlayer(mapPixelWidth / 2, mapPixelHeight / 2, 8, 8));
+        player.getPlayerBody().setUserData(player);
 
         Enemy.createEnemy(Enemy.EnemyType.SimpleEnemy, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
@@ -147,6 +148,8 @@ public class GameScreen implements Screen {
         }
 
         batch.end();
+
+        GameComponentProvider.cleanObjects();
 
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 

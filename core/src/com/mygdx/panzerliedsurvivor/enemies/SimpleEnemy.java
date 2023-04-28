@@ -27,4 +27,9 @@ public class SimpleEnemy extends Enemy {
     public void render(float delta) {
 
     }
+
+    @Override
+    public void kill() {
+        GameComponentProvider.deleteEnemy(this);
+    }
 }
