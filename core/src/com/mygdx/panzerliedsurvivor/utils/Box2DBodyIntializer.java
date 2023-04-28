@@ -27,7 +27,7 @@ public class Box2DBodyIntializer {
      * @param height height of the rectangle
      * @return the Body representing the player that was created
      */
-    public static Body createPlayer(int x, int y, int width, int height) {
+    public static Body createPlayer(float x, float y, int width, int height) {
         Filter filter = new Filter();
         filter.categoryBits = Constants.PLAYER_CATEGORY_BITS;
         filter.maskBits = Constants.PLAYER_MASK_BITS;

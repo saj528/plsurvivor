@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -42,11 +43,12 @@ public class GameScreen implements Screen {
     private final float WORLD_WIDTH = playerSize * 15;
     private final float WORLD_HEIGHT = playerSize * 15;
     private static final float CAMERA_LERP_SPEED = 0.1f;
+    int mapPixelWidth;
+    int mapPixelHeight;
 
     MapObjects mapObjects;
 
     OrthogonalTiledMapRenderer tiledMapRenderer;
-
 
 
     private TiledMap map;
@@ -73,11 +75,19 @@ public class GameScreen implements Screen {
 
         map = new TmxMapLoader().load("maps/map01.tmx");
 
+        MapProperties prop = map.getProperties();
+
+        int mapWidth = prop.get("width", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+
+        mapPixelWidth = mapWidth * tilePixelWidth;
+        mapPixelHeight = mapHeight * tilePixelHeight;
+
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
-
-
-        player = new Player(batch, spriteProcessor, mapObjects, createPlayer(2,2,8,8));
+        player = new Player(batch, spriteProcessor, mapObjects, createPlayer(mapPixelWidth / 2, mapPixelHeight / 2, 8, 8));
 
         Enemy.createEnemy(Enemy.EnemyType.SimpleEnemy, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
@@ -86,8 +96,6 @@ public class GameScreen implements Screen {
         parseMapLayerCollision(map, world);
 
     }
-
-
 
 
     @Override
@@ -103,11 +111,20 @@ public class GameScreen implements Screen {
         world.step(1 / 60f, 6, 2);
 
         camera.update();
-        //System.out.println(player.getPlayerBody().getPosition().x * PPM + " " + player.getPlayerBody().getPosition().y * PPM);
-        if (Math.abs((player.getPlayerBody().getPosition().x * PPM) - camera.position.x) > 2|| Math.abs((player.getPlayerBody().getPosition().y * PPM) - camera.position.y) > 2) {
-            Vector3 targetPosition = new Vector3((player.getPlayerBody().getPosition().x * PPM), (player.getPlayerBody().getPosition().y * PPM), 0);
+
+        if (Math.abs((player.getPlayerBody().getPosition().x * PPM) - camera.position.x) > 2 || Math.abs((player.getPlayerBody().getPosition().y * PPM) - camera.position.y) > 2) {
+
+            float cameraX = Math.max((camera.viewportWidth / 2), player.getPlayerBody().getPosition().x * PPM);
+            cameraX = Math.min(cameraX, mapPixelWidth - (camera.viewportWidth / 2));
+
+            float cameraY = Math.max((camera.viewportHeight / 2), player.getPlayerBody().getPosition().y * PPM);
+            cameraY = Math.min(cameraY, mapPixelHeight - (camera.viewportHeight / 2));
+
+            Vector3 targetPosition = new Vector3(cameraX, cameraY, 0);
             camera.position.lerp(targetPosition, CAMERA_LERP_SPEED);
+
         }
+
 
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
@@ -119,12 +136,12 @@ public class GameScreen implements Screen {
 
         player.renderAndUpdate(delta);
 
-        for(Bullet b : GameComponentProvider.getBullets()) {
+        for (Bullet b : GameComponentProvider.getBullets()) {
             b.update(delta);
             b.render(delta);
         }
 
-        for(Enemy enemy : GameComponentProvider.getEnemies()) {
+        for (Enemy enemy : GameComponentProvider.getEnemies()) {
             enemy.update(delta);
             enemy.render(delta);
         }
