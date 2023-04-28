@@ -12,28 +12,31 @@ public class SpriteProcessor {
     private TextureAtlas textureAtlas;
     private TextureRegion[] playerWalkingDownTexReg, playerWalkingUpTexReg,
             playerWalkingLeftTexReg, playerWalkingRightTexReg,
-            playerIdleUpTexReg,playerIdleDownTexReg,
-            playerIdleRightTexReg,playerIdleLeftTexReg;
+            playerIdleUpTexReg, playerIdleDownTexReg,
+            playerIdleRightTexReg, playerIdleLeftTexReg,
+            batEnemyFlyingDownTexReg, batEnemyFlyingUpTexReg,
+            batEnemyFlyingRightTexReg, batEnemyFlyingLeftTexReg;
     private float playerWalkingAnimSpeed = 0.20f;
 
     private Animation<TextureRegion> playerWalkingDownAnim, playerWalkingUpAnim,
-            playerWalkingRightAnim, playerWalkingLeftAnim, playerIdleDownAnim,
-            playerIdleUpAnim,playerIdleRightAnim,playerIdleLeftAnim;
+            playerWalkingRightAnim, playerWalkingLeftAnim,
+            playerIdleDownAnim, playerIdleUpAnim,
+            playerIdleRightAnim, playerIdleLeftAnim,
+            batEnemyFlyingDownAnim, batEnemyFlyingUpAnim,
+            batEnemyFlyingRightAnim, batEnemyFlyingLeftAnim;
 
-    private HashMap<String,Animation<TextureRegion>> animations;
+    private HashMap<String, Animation<TextureRegion>> animations;
 
-    private HashMap<String,TextureRegion> miscTextureRegions;
+    private HashMap<String, TextureRegion> miscTextureRegions;
 
     public SpriteProcessor() {
 
         animations = new HashMap<>();
         miscTextureRegions = new HashMap<>();
 
-        textureAtlas = new TextureAtlas("player_atlas.atlas");
+        textureAtlas = new TextureAtlas("pls_survivor.atlas");
 
-        Texture bulletTexture = new Texture("bullet.png");
-
-        miscTextureRegions.put("bullet",new TextureRegion(bulletTexture));
+        miscTextureRegions.put("bullet", textureAtlas.findRegion("bullet"));
 
         playerWalkingDownTexReg = createSpriteTextureRegion("walking_down", 1, 4);
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);
@@ -61,6 +64,19 @@ public class SpriteProcessor {
         playerIdleRightAnim = new Animation<TextureRegion>(0, playerIdleRightTexReg);
         playerIdleLeftAnim = new Animation<TextureRegion>(0, playerIdleLeftTexReg);
 
+        batEnemyFlyingDownTexReg = createSpriteTextureRegion("bat_flying_down", 1, 3);
+        batEnemyFlyingUpTexReg = createSpriteTextureRegion("bat_flying_up", 1, 3);
+        batEnemyFlyingRightTexReg = createSpriteTextureRegion("bat_flying_right", 1, 3);
+        batEnemyFlyingLeftTexReg = createSpriteTextureRegion("bat_flying_left", 1, 3);
+
+
+        batEnemyFlyingDownAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingDownTexReg);
+        batEnemyFlyingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingUpTexReg);
+        batEnemyFlyingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingRightTexReg);
+        batEnemyFlyingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingLeftTexReg);
+
+
+        //player
         animations.put("playerWalkingUp", playerWalkingUpAnim);
         animations.put("playerWalkingDown", playerWalkingDownAnim);
         animations.put("playerWalkingRight", playerWalkingRightAnim);
@@ -69,6 +85,12 @@ public class SpriteProcessor {
         animations.put("playerIdleDown", playerIdleDownAnim);
         animations.put("playerIdleRight", playerIdleRightAnim);
         animations.put("playerIdleLeft", playerIdleLeftAnim);
+
+        //bat enemy
+        animations.put("batFlyingDown", batEnemyFlyingDownAnim);
+        animations.put("batFlyingUp", batEnemyFlyingUpAnim);
+        animations.put("batFlyingRight", batEnemyFlyingRightAnim);
+        animations.put("batFlyingLeft", batEnemyFlyingLeftAnim);
 
 
     }

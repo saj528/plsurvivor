@@ -51,7 +51,6 @@ public class Bullet {
         angle = direction.angleDeg();
         rotatedTexture = new Sprite(bulletTexReg);
         rotatedTexture.flip(true, false);
-//        rotatedTexture.setOrigin(rotatedTexture.getWidth() / 2, rotatedTexture.getHeight() / 2);
         rotatedTexture.setOriginCenter();
         rotatedTexture.setRotation(angle);
         rotatedTexture.setPosition(((startPosition.x) * Constants.PPM) - (rotatedTexture.getWidth() / 2), (startPosition.y * Constants.PPM) - (rotatedTexture.getHeight() / 2));
@@ -65,7 +64,6 @@ public class Bullet {
 
     public void render(float delta) {
         rotatedTexture.draw(GameComponentProvider.getSpriteBatch());
-        //GameComponentProvider.getSpriteBatch().draw(bulletTexReg, (body.getPosition().x - offsetX) * Constants.PPM, (body.getPosition().y - offsetY) * Constants.PPM, bulletTexReg.getRegionWidth(), bulletTexReg.getRegionHeight());
     }
 
     public void kill() {
