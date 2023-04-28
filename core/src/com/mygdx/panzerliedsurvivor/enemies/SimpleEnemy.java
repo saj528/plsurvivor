@@ -18,8 +18,6 @@ public class SimpleEnemy extends Enemy {
     protected SimpleEnemy(int hitpoints, float movementSpeed, float width, float height,String animationName) {
         super(hitpoints, movementSpeed, width, height,animationName);
 
-
-
         currentAnimation = GameComponentProvider.getSpriteProcessor().getAnimations().get("batFlyingDown");
 
         animationOffsetX = currentAnimation.getKeyFrames()[0].getRegionWidth() / 2;
