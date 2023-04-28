@@ -3,6 +3,7 @@ package com.mygdx.panzerliedsurvivor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
@@ -35,11 +36,6 @@ public class Player {
 
     private Body playerBody;
 
-
-    //width and length don't match with parameter names
-    private final float PLAYER_USE_BOX_WIDTH = 2;
-    private final float PLAYER_USE_BOX_LENGTH = 15;
-
     private boolean isPlayerUsing = false;
 
     private ArrayList<Weapon> weapons;
@@ -53,9 +49,6 @@ public class Player {
         this.mapObjects = mapObjects;
 
         this.playerBody = playerBody;
-
-        //playerBoundingBox = new Rectangle(2, 2, 16, 16);
-        //playerUseBox = new Rectangle(playerBoundingBox.x + (playerBoundingBox.width / 2), playerBoundingBox.y - playerBoundingBox.height + 1, 2, 15);
 
         currentAnimation = spriteProcessor.getAnimations().get("playerWalkingDown");
         direction = "down";
@@ -98,6 +91,7 @@ public class Player {
                 }
             }
         }*/
+
 
         int horizontalForce = 0;
         int verticalForce = 0;

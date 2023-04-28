@@ -13,11 +13,11 @@
             "scaleInEditor": 1
         },
         "map01.tmx": {
-            "scale": 5.5,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 689.0909090909091,
-                "y": 254.4545454545455
+                "x": 309.33333333333337,
+                "y": 505
             }
         },
         "map01.tmx#spritesheetTileSet": {

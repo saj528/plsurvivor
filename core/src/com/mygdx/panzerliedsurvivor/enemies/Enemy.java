@@ -1,5 +1,6 @@
 package com.mygdx.panzerliedsurvivor.enemies;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer;
@@ -10,6 +11,7 @@ public abstract class Enemy {
     public enum EnemyType {
         SimpleEnemy
     }
+
     protected int hitpoints;
 
     protected float movementSpeed;
@@ -18,9 +20,13 @@ public abstract class Enemy {
 
     protected float height;
 
-    protected TextureRegion sprite;
+    protected String animationName;
 
     protected Body body;
+
+    protected Animation<TextureRegion> currentAnimation;
+
+    protected float animationTimer;
 
     /***
      * Create an Enemy of the given type at the given position
@@ -34,16 +40,17 @@ public abstract class Enemy {
 
         int health;
         float movementSpeed, width, height;
-        TextureRegion sprite = null;
+        String animationName;
 
-        switch(type) {
+        switch (type) {
             default:
             case SimpleEnemy:
                 health = 10;
                 movementSpeed = 1f;
                 width = 10;
                 height = 10;
-                enemy = new SimpleEnemy(health, movementSpeed, width, height, sprite);
+                animationName = "batFlying";
+                enemy = new SimpleEnemy(health, movementSpeed, width, height, animationName);
         }
 
         Body enemyBody = Box2DBodyIntializer.createEnemyBody(enemy, x, y);
@@ -55,12 +62,12 @@ public abstract class Enemy {
         return enemy;
     }
 
-    protected Enemy(int hitpoints, float movementSpeed, float width, float height, TextureRegion sprite) {
+    protected Enemy(int hitpoints, float movementSpeed, float width, float height, String animationName) {
         this.hitpoints = hitpoints;
         this.movementSpeed = movementSpeed;
         this.width = width;
         this.height = height;
-        this.sprite = sprite;
+        this.animationName = animationName;
     }
 
     public abstract void update(float delta);
@@ -99,12 +106,20 @@ public abstract class Enemy {
         this.height = height;
     }
 
-    public TextureRegion getSprite() {
-        return sprite;
+    public String getAnimationName() {
+        return animationName;
     }
 
-    public void setSprite(TextureRegion sprite) {
-        this.sprite = sprite;
+    public void setAnimationName(String animationName) {
+        this.animationName = animationName;
+    }
+
+    public Animation<TextureRegion> getCurrentAnimation() {
+        return currentAnimation;
+    }
+
+    public void setCurrentAnimation(Animation<TextureRegion> currentAnimation) {
+        this.currentAnimation = currentAnimation;
     }
 
     public Body getBody() {
