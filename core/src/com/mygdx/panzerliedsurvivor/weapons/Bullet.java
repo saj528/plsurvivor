@@ -45,6 +45,8 @@ public class Bullet {
 
         this.body = Box2DBodyIntializer.createBulletBody(startPosition);
 
+        this.body.setUserData(this);
+
         this.body.applyLinearImpulse(direction.setLength(speed), this.body.getPosition(), true);
         angle = direction.angleDeg();
         rotatedTexture = new Sprite(bulletTexReg);
@@ -62,5 +64,49 @@ public class Bullet {
 
     public void render(float delta) {
         rotatedTexture.draw(GameComponentProvider.getSpriteBatch());
+    }
+
+    public void kill() {
+        GameComponentProvider.deleteBullet(this);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public Vector2 getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Vector2 direction) {
+        this.direction = direction;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
+
+    public float getDurability() {
+        return durability;
+    }
+
+    public void setDurability(float durability) {
+        this.durability = durability;
     }
 }

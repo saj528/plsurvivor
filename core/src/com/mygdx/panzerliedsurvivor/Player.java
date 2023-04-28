@@ -10,7 +10,8 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mygdx.panzerliedsurvivor.weapons.SimpleWeapon;
+import com.mygdx.panzerliedsurvivor.weapons.PistolWeapon;
+import com.mygdx.panzerliedsurvivor.weapons.SpreadWeapon;
 import com.mygdx.panzerliedsurvivor.weapons.Weapon;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ import java.util.ArrayList;
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 
 public class Player {
+
+    private int maxHitpoints;
+
+    private int currentHitpoints;
 
     private SpriteBatch batch;
     private SpriteProcessor spriteProcessor;
@@ -56,7 +61,11 @@ public class Player {
         walkingTimer = 0;
 
         weapons = new ArrayList<>();
-        weapons.add(new SimpleWeapon(3f, null, 10, 10, this));
+        weapons.add(new SpreadWeapon(3f, null, 10, 10, this));
+        weapons.add(new PistolWeapon(2f, null, 5, 5 , this));
+
+        this.currentHitpoints = 10;
+        this.maxHitpoints = 10;
     }
 
     public void renderAndUpdate(float delta) {
@@ -127,10 +136,30 @@ public class Player {
 
     }
 
+    public void kill() {
+
+    }
+
 
 /*    public Rectangle getPlayerBoundingBox() {
         return playerBoundingBox;
     }*/
+
+    public int getMaxHitpoints() {
+        return maxHitpoints;
+    }
+
+    public void setMaxHitpoints(int maxHitpoints) {
+        this.maxHitpoints = maxHitpoints;
+    }
+
+    public int getCurrentHitpoints() {
+        return currentHitpoints;
+    }
+
+    public void setCurrentHitpoints(int currentHitpoints) {
+        this.currentHitpoints = currentHitpoints;
+    }
 
     public Body getPlayerBody() {
         return playerBody;

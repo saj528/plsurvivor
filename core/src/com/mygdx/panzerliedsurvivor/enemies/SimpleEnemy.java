@@ -45,4 +45,9 @@ public class SimpleEnemy extends Enemy {
         GameComponentProvider.getSpriteBatch().draw(currentAnimation.getKeyFrame(animationTimer, true), (body.getPosition().x * PPM) - animationOffsetX, (body.getPosition().y * PPM) - animationOffsetY);
 
     }
+
+    @Override
+    public void kill() {
+        GameComponentProvider.deleteEnemy(this);
+    }
 }

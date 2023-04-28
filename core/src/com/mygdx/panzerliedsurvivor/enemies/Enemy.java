@@ -11,9 +11,10 @@ public abstract class Enemy {
     public enum EnemyType {
         SimpleEnemy
     }
+    protected int maxHitpoints;
 
-    protected int hitpoints;
-
+    protected int currentHitpoints;
+    
     protected float movementSpeed;
 
     protected float width;
@@ -57,13 +58,17 @@ public abstract class Enemy {
 
         enemy.setBody(enemyBody);
 
+        enemyBody.setUserData(enemy);
+
         GameComponentProvider.addEnemy(enemy);
 
         return enemy;
     }
 
+
     protected Enemy(int hitpoints, float movementSpeed, float width, float height, String animationName) {
-        this.hitpoints = hitpoints;
+        this.maxHitpoints = hitpoints;
+        this.currentHitpoints = hitpoints;
         this.movementSpeed = movementSpeed;
         this.width = width;
         this.height = height;
@@ -74,12 +79,22 @@ public abstract class Enemy {
 
     public abstract void render(float delta);
 
-    public int getHitpoints() {
-        return hitpoints;
+    public abstract void kill();
+
+    public int getMaxHitpoints() {
+        return maxHitpoints;
     }
 
-    public void setHitpoints(int hitpoints) {
-        this.hitpoints = hitpoints;
+    public void setMaxHitpoints(int maxHitpoints) {
+        this.maxHitpoints = maxHitpoints;
+    }
+
+    public int getCurrentHitpoints() {
+        return currentHitpoints;
+    }
+
+    public void setCurrentHitpoints(int currentHitpoints) {
+        this.currentHitpoints = currentHitpoints;
     }
 
     public float getMovementSpeed() {

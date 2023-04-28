@@ -3,17 +3,16 @@ package com.mygdx.panzerliedsurvivor.weapons;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.panzerliedsurvivor.Player;
-import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 import java.util.Random;
 
 import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.*;
 
-public class SimpleWeapon extends Weapon {
+public class SpreadWeapon extends Weapon {
 
     private float projectileSpeed = 0.05f;
 
-    public SimpleWeapon(float attackSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
+    public SpreadWeapon(float attackSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
         super(attackSpeed, sprite, damage, projectileDurability, player);
     }
 
