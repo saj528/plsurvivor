@@ -47,8 +47,11 @@ public class GameContactListener implements ContactListener {
         enemy.setCurrentHitpoints(enemyHealth - damage);
         if (enemy.getCurrentHitpoints() <= 0)
             enemy.kill();
-        // TODO handle projectileDurability
-        bullet.kill();
+
+        bullet.setDurability(bullet.getDurability() - 1);
+        if (bullet.getDurability() <= 0) {
+            bullet.kill();
+        }
     }
 
     private void handlePlayerEnemyContact(Player player, Enemy enemy) {

@@ -3,15 +3,12 @@ package com.mygdx.panzerliedsurvivor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mygdx.panzerliedsurvivor.weapons.PistolWeapon;
-import com.mygdx.panzerliedsurvivor.weapons.SpreadWeapon;
 import com.mygdx.panzerliedsurvivor.weapons.Weapon;
 
 import java.util.ArrayList;
@@ -61,8 +58,8 @@ public class Player {
         walkingTimer = 0;
 
         weapons = new ArrayList<>();
-        weapons.add(new SpreadWeapon(3f, null, 10, 10, this));
-        weapons.add(new PistolWeapon(2f, null, 5, 5 , this));
+        Weapon.addWeapon(Weapon.WeaponType.PistolWeapon, this);
+        Weapon.addWeapon(Weapon.WeaponType.SpreadWeapon, this);
 
         this.currentHitpoints = 10;
         this.maxHitpoints = 10;
@@ -175,5 +172,13 @@ public class Player {
 
     public void setPlayerUsing(boolean playerUsing) {
         isPlayerUsing = playerUsing;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(ArrayList<Weapon> weapons) {
+        this.weapons = weapons;
     }
 }

@@ -12,10 +12,9 @@ import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.getSprite
 
 public class PistolWeapon extends Weapon {
 
-    private float projectileSpeed = 0.1f;
 
-    public PistolWeapon(float attackSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
-        super(attackSpeed, sprite, damage, projectileDurability, player);
+    public PistolWeapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
+        super(attackSpeed, projectileSpeed, sprite, damage, projectileDurability, player);
     }
 
     @Override

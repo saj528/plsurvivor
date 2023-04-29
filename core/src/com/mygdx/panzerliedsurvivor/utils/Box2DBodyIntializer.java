@@ -100,8 +100,9 @@ public class Box2DBodyIntializer {
         fixtureDef.density = 1f;
         fixtureDef.friction = 0f;
         fixtureDef.shape = circleShape;
-        fixtureDef.filter.categoryBits = Constants.BULLET_CATEGORY_BITS;
-        fixtureDef.filter.maskBits = Constants.BULLET_MASK_BITS;
+//        fixtureDef.filter.categoryBits = Constants.BULLET_CATEGORY_BITS;
+//        fixtureDef.filter.maskBits = Constants.BULLET_MASK_BITS;
+        fixtureDef.isSensor = true;
 
         bulletBody.createFixture(fixtureDef);
         circleShape.dispose();
