@@ -10,10 +10,9 @@ import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.*;
 
 public class SpreadWeapon extends Weapon {
 
-    private float projectileSpeed = 0.05f;
 
-    public SpreadWeapon(float attackSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
-        super(attackSpeed, sprite, damage, projectileDurability, player);
+    public SpreadWeapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
+        super(attackSpeed, projectileSpeed, sprite, damage, projectileDurability, player);
     }
 
     @Override

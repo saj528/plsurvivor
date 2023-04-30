@@ -9,7 +9,6 @@ import com.mygdx.panzerliedsurvivor.SpriteProcessor;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 import com.mygdx.panzerliedsurvivor.Player;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

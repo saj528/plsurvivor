@@ -52,6 +52,7 @@ public abstract class Enemy {
                 height = 10;
                 animationName = "batFlying";
                 enemy = new SimpleEnemy(health, movementSpeed, width, height, animationName);
+                break;
         }
 
         Body enemyBody = Box2DBodyIntializer.createEnemyBody(enemy, x, y);

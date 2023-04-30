@@ -20,6 +20,10 @@ public class Bullet {
 
     float durability;
 
+    float timeToLive = 10f;
+
+    float lifetime = 0f;
+
     TextureRegion bulletTexReg;
 
     float angle;
@@ -60,6 +64,10 @@ public class Bullet {
 
     public void update(float delta) {
         rotatedTexture.setPosition(((body.getPosition().x) * Constants.PPM) - (rotatedTexture.getWidth() / 2), ((body.getPosition().y) * Constants.PPM) - (rotatedTexture.getHeight() / 2));
+        lifetime += delta;
+        if (lifetime >= timeToLive) {
+            this.kill();
+        }
     }
 
     public void render(float delta) {
