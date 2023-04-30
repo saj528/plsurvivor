@@ -31,13 +31,28 @@ public class PistolWeapon extends Weapon {
         if (target == null)
             return;
         Vector2 direction = target.getBody().getPosition().sub(player.getPlayerBody().getPosition()).nor().scl(projectileSpeed);
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), direction, projectileSpeed, 5, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
     }
 
-    //TODO real implementation
     private Enemy getNearestEnemy() {
         Set<Enemy> enemies = GameComponentProvider.getEnemies();
-        return enemies.isEmpty() ? null : enemies.iterator().next();
+        if(enemies.isEmpty())
+            return null;
+
+        Vector2 weaponPos = this.player.getPlayerBody().getPosition();
+        float minDist = Float.MAX_VALUE;
+        Enemy nearestEnemy = null;
+
+        for (Enemy enemy : enemies)
+        {
+            float dist = Math.abs(enemy.getBody().getPosition().sub(weaponPos).len());
+            if (dist < minDist) {
+                nearestEnemy = enemy;
+                minDist = dist;
+            }
+        }
+
+        return nearestEnemy;
     }
 }
