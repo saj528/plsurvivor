@@ -6,6 +6,7 @@ import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class EnemyFactory {
 
@@ -15,11 +16,18 @@ public class EnemyFactory {
     Enemy.EnemyType type;
     int enemyCount;
     int spawnRateSeconds;
+    Random random;
+    int currentRandomInt;
 
-    public EnemyFactory(Enemy.EnemyType type, int enemyCount, int spawnRateSeconds) {
+    float mapWidthPixels, mapHeightPixels;
+
+    public EnemyFactory(Enemy.EnemyType type, int enemyCount, int spawnRateSeconds, float mapWidthPixels, float mapHeightPixels) {
         this.type = type;
         this.enemyCount = enemyCount;
         this.spawnRateSeconds = spawnRateSeconds;
+        this.mapWidthPixels = mapWidthPixels;
+        this.mapHeightPixels = mapHeightPixels;
+        random = new Random();
     }
 
 
@@ -28,11 +36,25 @@ public class EnemyFactory {
         counter += delta;
 
         OrthographicCamera camera = GameComponentProvider.getCamera();
-        spawnerX = camera.position.x - camera.viewportWidth;
-        spawnerY = camera.position.y;
+
+        currentRandomInt = random.nextInt(4);
+
+        if (currentRandomInt == 0) {
+            spawnerX = camera.position.x + camera.viewportWidth;
+            spawnerY = camera.position.y;
+        } else if (currentRandomInt == 1) {
+            spawnerX = camera.position.x - camera.viewportWidth;
+            spawnerY = camera.position.y;
+        } else if (currentRandomInt == 2) {
+            spawnerX = camera.position.x;
+            spawnerY = camera.position.y + camera.viewportHeight;
+        } else if (currentRandomInt == 3) {
+            spawnerX = camera.position.x;
+            spawnerY = camera.position.y - camera.viewportHeight;
+        }
 
         if (counter >= spawnRateSeconds & enemyCount > 0) {
-            Enemy.createEnemy(type, Math.max(0, spawnerX), spawnerY);
+            Enemy.createEnemy(type, Math.max(0, Math.min(spawnerX, mapWidthPixels)), Math.max(0, Math.min(spawnerY, mapHeightPixels)));
             enemyCount--;
             counter = 0;
         }
