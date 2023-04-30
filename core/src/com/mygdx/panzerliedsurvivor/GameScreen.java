@@ -50,6 +50,8 @@ public class GameScreen implements Screen {
 
     OrthogonalTiledMapRenderer tiledMapRenderer;
 
+    private EnemyFactory enemyFactory;
+
 
     private TiledMap map;
 
@@ -61,7 +63,7 @@ public class GameScreen implements Screen {
 
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-        camera = new OrthographicCamera();
+        camera = GameComponentProvider.getCamera();
 
         camera.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
@@ -72,6 +74,8 @@ public class GameScreen implements Screen {
         spriteProcessor = new SpriteProcessor();
 
         batch = GameComponentProvider.getSpriteBatch();
+
+
 
         map = new TmxMapLoader().load("maps/map01.tmx");
 
@@ -90,11 +94,13 @@ public class GameScreen implements Screen {
         player = new Player(batch, spriteProcessor, mapObjects, createPlayer(mapPixelWidth / 2, mapPixelHeight / 2, 8, 8));
         player.getPlayerBody().setUserData(player);
 
-        Enemy.createEnemy(Enemy.EnemyType.SimpleEnemy, WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+
 
         GameComponentProvider.setPlayer(player);
 
         parseMapLayerCollision(map, world);
+
+        enemyFactory = new EnemyFactory(Enemy.EnemyType.SimpleEnemy,20,1,mapPixelWidth,mapPixelHeight);
 
     }
 
@@ -153,7 +159,7 @@ public class GameScreen implements Screen {
 
         box2DDebugRenderer.render(world, camera.combined.scl(PPM));
 
-
+        enemyFactory.update(delta);
     }
 
     @Override

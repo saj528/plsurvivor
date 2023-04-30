@@ -1,5 +1,7 @@
 package com.mygdx.panzerliedsurvivor.utils;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -21,6 +23,8 @@ public class GameComponentProvider {
     private static World gameWorld;
     private static SpriteBatch spriteBatch;
     private static SpriteProcessor spriteProcessor;
+    private static OrthographicCamera camera;
+
 
     private static Set<Bullet> bullets = new HashSet<>();
 
@@ -56,6 +60,14 @@ public class GameComponentProvider {
             spriteProcessor = new SpriteProcessor();
         }
         return spriteProcessor;
+    }
+
+    public static OrthographicCamera getCamera() {
+
+        if (camera == null) {
+            camera = new OrthographicCamera();
+        }
+        return camera;
     }
 
     public static Set<Bullet> getBullets() {
