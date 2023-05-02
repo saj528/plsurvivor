@@ -15,13 +15,13 @@ public class EnemyFactory {
     float counter = 0;
     Enemy.EnemyType type;
     int enemyCount;
-    int spawnRateSeconds;
+    float spawnRateSeconds;
     Random random;
     int currentRandomInt;
 
     float mapWidthPixels, mapHeightPixels;
 
-    public EnemyFactory(Enemy.EnemyType type, int enemyCount, int spawnRateSeconds, float mapWidthPixels, float mapHeightPixels) {
+    public EnemyFactory(Enemy.EnemyType type, int enemyCount, float spawnRateSeconds, float mapWidthPixels, float mapHeightPixels) {
         this.type = type;
         this.enemyCount = enemyCount;
         this.spawnRateSeconds = spawnRateSeconds;
