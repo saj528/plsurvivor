@@ -33,6 +33,8 @@ public abstract class Enemy {
 
     protected float timeDamaged = 0f;
 
+    protected float sizeRadius;
+
     /***
      * Create an Enemy of the given type at the given position
      * @param type The type of enemy to create. This is where type specific details (hp, speed etc.) will be defined
@@ -46,6 +48,7 @@ public abstract class Enemy {
         int health;
         float movementSpeed, width, height;
         String animationName;
+        float sizeRadius;
 
         switch (type) {
             default:
@@ -55,11 +58,12 @@ public abstract class Enemy {
                 width = 10;
                 height = 10;
                 animationName = "batFlying";
+                sizeRadius = .3f;
                 enemy = new SimpleEnemy(health, movementSpeed, width, height, animationName);
                 break;
         }
 
-        Body enemyBody = Box2DBodyIntializer.createEnemyCircleBody(enemy, x, y);
+        Body enemyBody = Box2DBodyIntializer.createEnemyCircleBody(x, y,sizeRadius);
 
         enemy.setBody(enemyBody);
 

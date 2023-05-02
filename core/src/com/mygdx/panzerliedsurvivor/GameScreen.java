@@ -20,7 +20,8 @@ import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 
-import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayer;
+import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerBoxBody;
+import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerCircleBody;
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.TiledObjectUtil.parseMapLayerCollision;
 
@@ -91,7 +92,7 @@ public class GameScreen implements Screen {
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
-        player = new Player(batch, spriteProcessor, mapObjects, createPlayer(mapPixelWidth / 2, mapPixelHeight / 2, 8, 8));
+        player = new Player(batch, spriteProcessor, mapObjects, createPlayerCircleBody(mapPixelWidth / 2, mapPixelHeight / 2, .25f));
         player.getPlayerBody().setUserData(player);
 
 
