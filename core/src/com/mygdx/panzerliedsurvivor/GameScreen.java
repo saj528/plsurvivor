@@ -40,8 +40,8 @@ public class GameScreen implements Screen {
     Player player;
 
     private final float playerSize = 16;
-    private final float WORLD_WIDTH = playerSize * 15;
-    private final float WORLD_HEIGHT = playerSize * 15;
+    private final float WORLD_WIDTH = playerSize * 25;
+    private final float WORLD_HEIGHT = playerSize * 25;
     private static final float CAMERA_LERP_SPEED = 0.1f;
     int mapPixelWidth;
     int mapPixelHeight;
@@ -100,7 +100,7 @@ public class GameScreen implements Screen {
 
         parseMapLayerCollision(map, world);
 
-        enemyFactory = new EnemyFactory(Enemy.EnemyType.SimpleEnemy,20,1,mapPixelWidth,mapPixelHeight);
+        enemyFactory = new EnemyFactory(Enemy.EnemyType.SimpleEnemy,50,1,mapPixelWidth,mapPixelHeight);
 
     }
 
