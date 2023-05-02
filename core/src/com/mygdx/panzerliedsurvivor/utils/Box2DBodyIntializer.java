@@ -26,7 +26,7 @@ public class Box2DBodyIntializer {
      * @param height height of the rectangle
      * @return the Body representing the player that was created
      */
-    public static Body createPlayer(float x, float y, int width, int height) {
+    public static Body createPlayerBoxBody(float x, float y, int width, int height) {
         Filter filter = new Filter();
         filter.categoryBits = Constants.PLAYER_CATEGORY_BITS;
         filter.maskBits = Constants.PLAYER_MASK_BITS;
@@ -36,6 +36,18 @@ public class Box2DBodyIntializer {
 
         return playerBody;
     }
+
+    public static Body createPlayerCircleBody(float x, float y, float radius) {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.PLAYER_CATEGORY_BITS;
+        filter.maskBits = Constants.PLAYER_MASK_BITS;
+
+        Body playerBody = createCircle(x, y, radius);
+        playerBody.getFixtureList().get(0).setFilterData(filter);
+
+        return playerBody;
+    }
+
 
     public static Body createEnemyBoxBody(Enemy enemy, float x, float y) {
         Filter filter = new Filter();
@@ -48,11 +60,20 @@ public class Box2DBodyIntializer {
         return enemyBody;
     }
 
-    public static Body createEnemyCircleBody(Enemy enemy, float x, float y) {
+    public static Body createEnemyCircleBody(float x, float y,float radius) {
         Filter filter = new Filter();
         filter.categoryBits = Constants.ENEMY_CATEGORY_BITS;
         filter.maskBits = Constants.ENEMY_MASK_BITS;
 
+        Body body = createCircle(x,y,radius);
+
+        body.getFixtureList().get(0).setFilterData(filter);
+
+
+        return body;
+    }
+
+    public static Body createCircle(float x, float y, float radius){
         Body body;
         World world = GameComponentProvider.getGameWorld();
 
@@ -63,19 +84,14 @@ public class Box2DBodyIntializer {
         body = world.createBody(def);
 
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(.3f);
+        circleShape.setRadius(radius);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 1f;
         fixtureDef.friction = 0f;
         fixtureDef.shape = circleShape;
-
-
-
         body.createFixture(fixtureDef);
-        body.getFixtureList().get(0).setFilterData(filter);
         circleShape.dispose();
-
         return body;
     }
 

@@ -42,7 +42,7 @@ public class Player {
 
     private ArrayList<Weapon> weapons;
 
-    public Player(SpriteBatch batch, SpriteProcessor spriteProcessor, MapObjects mapObjects,Body playerBody) {
+    public Player(SpriteBatch batch, SpriteProcessor spriteProcessor, MapObjects mapObjects, Body playerBody) {
 
         this.batch = batch;
 
@@ -69,7 +69,7 @@ public class Player {
         walkingTimer += delta;
         batch.draw(currentAnimation.getKeyFrame(walkingTimer, true), playerBody.getPosition().x * PPM - 8, playerBody.getPosition().y * PPM - 16);
 
-        for(Weapon weapon : weapons) {
+        for (Weapon weapon : weapons) {
             weapon.update(delta);
         }
 
@@ -78,26 +78,11 @@ public class Player {
     public void detectInput(float delta) {
 
 
-        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             isPlayerUsing = true;
         }
 
         float speed = 10f;
-/*        for (RectangleMapObject rectangleObject : mapObjects.getByType(RectangleMapObject.class)) {
-            Rectangle rectangle = rectangleObject.getRectangle();
-            if (Intersector.overlaps(rectangle, playerBoundingBox)) {
-                if (direction.equals("up")) {
-                    playerBoundingBox.y -= speed * delta;
-                } else if (direction.equals("down")) {
-                    playerBoundingBox.y += speed * delta;
-                } else if (direction.equals("left")) {
-                    playerBoundingBox.x += speed * delta;
-                } else if (direction.equals("right")) {
-                    playerBoundingBox.x -= speed * delta;
-                }
-            }
-        }*/
-
 
         int horizontalForce = 0;
         int verticalForce = 0;
@@ -129,18 +114,13 @@ public class Player {
                 currentAnimation = spriteProcessor.getAnimations().get("playerIdleLeft");
             }
         }
-        playerBody.setLinearVelocity(new Vector2(horizontalForce * speed,verticalForce * speed));
+        playerBody.setLinearVelocity(new Vector2(horizontalForce * speed, verticalForce * speed));
 
     }
 
     public void kill() {
 
     }
-
-
-/*    public Rectangle getPlayerBoundingBox() {
-        return playerBoundingBox;
-    }*/
 
     public int getMaxHitpoints() {
         return maxHitpoints;
