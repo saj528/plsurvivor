@@ -10,8 +10,7 @@ public class Box2DBodyIntializer {
 
     private static final float SCALE = 1.0f;
 
-    public static BodyDef getBodyDef(float x, float y)
-    {
+    public static BodyDef getBodyDef(float x, float y) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(x, y);
@@ -38,7 +37,7 @@ public class Box2DBodyIntializer {
         return playerBody;
     }
 
-    public static Body createEnemyBody(Enemy enemy, float x, float y) {
+    public static Body createEnemyBoxBody(Enemy enemy, float x, float y) {
         Filter filter = new Filter();
         filter.categoryBits = Constants.ENEMY_CATEGORY_BITS;
         filter.maskBits = Constants.ENEMY_MASK_BITS;
@@ -49,18 +48,49 @@ public class Box2DBodyIntializer {
         return enemyBody;
     }
 
+    public static Body createEnemyCircleBody(Enemy enemy, float x, float y) {
+        Filter filter = new Filter();
+        filter.categoryBits = Constants.ENEMY_CATEGORY_BITS;
+        filter.maskBits = Constants.ENEMY_MASK_BITS;
+
+        Body body;
+        World world = GameComponentProvider.getGameWorld();
+
+        BodyDef def = new BodyDef();
+        def.type = BodyDef.BodyType.DynamicBody;
+        def.position.set(x / PPM, y / PPM);
+        def.fixedRotation = true;
+        body = world.createBody(def);
+
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(.3f);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.density = 1f;
+        fixtureDef.friction = 0f;
+        fixtureDef.shape = circleShape;
+
+
+
+        body.createFixture(fixtureDef);
+        body.getFixtureList().get(0).setFilterData(filter);
+        circleShape.dispose();
+
+        return body;
+    }
+
     public static Body createBox(float x, float y, float width, float height, boolean isStatic) {
         Body boxBody;
 
         World world = GameComponentProvider.getGameWorld();
 
         BodyDef def = new BodyDef();
-        if(isStatic){
+        if (isStatic) {
             def.type = BodyDef.BodyType.StaticBody;
-        }else{
+        } else {
             def.type = BodyDef.BodyType.DynamicBody;
         }
-        def.position.set(x / PPM,y / PPM);
+        def.position.set(x / PPM, y / PPM);
         def.fixedRotation = true;
         boxBody = world.createBody(def);
 
@@ -68,7 +98,7 @@ public class Box2DBodyIntializer {
         polygonShape.setAsBox(width / SCALE / PPM, height / SCALE / PPM);
 
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.density =  1f;
+        fixtureDef.density = 1f;
         fixtureDef.friction = 1f;
         fixtureDef.shape = polygonShape;
 

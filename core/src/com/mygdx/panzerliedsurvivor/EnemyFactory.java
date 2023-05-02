@@ -54,7 +54,7 @@ public class EnemyFactory {
         }
 
         if (counter >= spawnRateSeconds & enemyCount > 0) {
-            Enemy.createEnemy(type, Math.max(0, Math.min(spawnerX, mapWidthPixels)), Math.max(0, Math.min(spawnerY, mapHeightPixels)));
+            Enemy.createEnemy(type, Math.max(10, Math.min(spawnerX, mapWidthPixels - 10)), Math.max(10, Math.min(spawnerY, mapHeightPixels - 10)));
             enemyCount--;
             counter = 0;
         }
