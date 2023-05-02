@@ -33,7 +33,6 @@ public abstract class Enemy {
 
     protected float timeDamaged = 0f;
 
-    protected float sizeRadius;
 
     /***
      * Create an Enemy of the given type at the given position
@@ -63,7 +62,7 @@ public abstract class Enemy {
                 break;
         }
 
-        Body enemyBody = Box2DBodyIntializer.createEnemyCircleBody(x, y,sizeRadius);
+        Body enemyBody = Box2DBodyIntializer.createEnemyCircleBody(x, y, sizeRadius);
 
         enemy.setBody(enemyBody);
 

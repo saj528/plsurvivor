@@ -17,7 +17,7 @@ public class SimpleEnemy extends Enemy {
 
 
 
-    protected SimpleEnemy(int hitpoints, float movementSpeed, float width, float height,String animationName) {
+    protected SimpleEnemy(int hitpoints, float movementSpeed, float width, float height, String animationName) {
         super(hitpoints, movementSpeed, width, height,animationName);
 
         currentAnimation = GameComponentProvider.getSpriteProcessor().getAnimations().get(animationName + "Down");
