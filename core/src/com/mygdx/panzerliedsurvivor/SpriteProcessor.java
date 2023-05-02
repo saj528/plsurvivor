@@ -36,7 +36,7 @@ public class SpriteProcessor {
 
         textureAtlas = new TextureAtlas("pls_survivor.atlas");
 
-        miscTextureRegions.put("bullet", textureAtlas.findRegion("bullet"));
+        miscTextureRegions.put("bullet", textureAtlas.findRegion("bulletThin"));
 
         playerWalkingDownTexReg = createSpriteTextureRegion("walking_down", 1, 4);
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);

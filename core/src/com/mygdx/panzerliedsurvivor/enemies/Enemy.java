@@ -55,7 +55,7 @@ public abstract class Enemy {
                 break;
         }
 
-        Body enemyBody = Box2DBodyIntializer.createEnemyBody(enemy, x, y);
+        Body enemyBody = Box2DBodyIntializer.createEnemyCircleBody(enemy, x, y);
 
         enemy.setBody(enemyBody);
 
