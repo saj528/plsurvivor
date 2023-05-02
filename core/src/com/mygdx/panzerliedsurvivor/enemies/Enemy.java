@@ -29,6 +29,10 @@ public abstract class Enemy {
 
     protected float animationTimer;
 
+    protected boolean isDamaged = false;
+
+    protected float timeDamaged = 0f;
+
     /***
      * Create an Enemy of the given type at the given position
      * @param type The type of enemy to create. This is where type specific details (hp, speed etc.) will be defined
@@ -144,5 +148,13 @@ public abstract class Enemy {
 
     public void setBody(Body body) {
         this.body = body;
+    }
+
+    public boolean wasDamaged() {
+        return isDamaged;
+    }
+
+    public void setDamaged(boolean damaged) {
+        this.isDamaged = damaged;
     }
 }

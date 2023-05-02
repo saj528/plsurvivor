@@ -1,5 +1,7 @@
 package com.mygdx.panzerliedsurvivor.enemies;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.panzerliedsurvivor.Player;
@@ -42,8 +44,21 @@ public class SimpleEnemy extends Enemy {
     @Override
     public void render(float delta) {
         animationTimer += delta;
-        GameComponentProvider.getSpriteBatch().draw(currentAnimation.getKeyFrame(animationTimer, true), (body.getPosition().x * PPM) - animationOffsetX, (body.getPosition().y * PPM) - animationOffsetY);
 
+        TextureRegion region = currentAnimation.getKeyFrame(animationTimer, true);
+        Sprite sprite = new Sprite(region);
+        sprite.setPosition((body.getPosition().x * PPM) - animationOffsetX, (body.getPosition().y * PPM) - animationOffsetY);
+        if(this.isDamaged) {
+            sprite.setColor(Color.RED);
+            this.timeDamaged += delta;
+            if (this.timeDamaged >= 0.1f) {
+                this.isDamaged = false;
+                this.timeDamaged = 0f;
+            }
+        }
+
+//        GameComponentProvider.getSpriteBatch().draw(currentAnimation.getKeyFrame(animationTimer, true), (body.getPosition().x * PPM) - animationOffsetX, (body.getPosition().y * PPM) - animationOffsetY);
+        sprite.draw(GameComponentProvider.getSpriteBatch());
     }
 
     @Override
