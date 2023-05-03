@@ -58,8 +58,9 @@ public class Player {
         walkingTimer = 0;
 
         weapons = new ArrayList<>();
-        Weapon.addWeapon(Weapon.WeaponType.PistolWeapon, this);
+        Weapon.addWeapon(Weapon.WeaponType.M1911, this);
         Weapon.addWeapon(Weapon.WeaponType.SpreadWeapon, this);
+        Weapon.addWeapon(Weapon.WeaponType.Mp40, this);
 
         this.currentHitpoints = 10;
         this.maxHitpoints = 10;
