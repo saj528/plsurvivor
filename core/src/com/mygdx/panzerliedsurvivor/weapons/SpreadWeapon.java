@@ -11,16 +11,25 @@ import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.*;
 public class SpreadWeapon extends Weapon {
 
 
-    public SpreadWeapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, float projectileDurability, Player player) {
-        super(attackSpeed, projectileSpeed, sprite, damage, projectileDurability, player);
+    public SpreadWeapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, int magSize,
+                        float reloadSpeed, float projectileDurability, Player player) {
+        super(attackSpeed, projectileSpeed, sprite, damage, magSize, reloadSpeed, 0, projectileDurability, player);
     }
 
     @Override
     public void update(float delta) {
-        timeSinceLastAttack += delta;
-        if(timeSinceLastAttack >= attackSpeed) {
+        if (currentAmmo == 0) {
+            if (reloadTimer.updateTimerAndCheckCompletion(delta)) {
+                currentAmmo = magSize;
+                reloadTimer.reset();
+            }
+        }
+
+        if (currentAmmo > 0 && attackTimer.updateTimerAndCheckCompletion(delta)) {
             fire();
-            timeSinceLastAttack = timeSinceLastAttack - attackSpeed;
+            currentAmmo--;
+            if (currentAmmo == 0)
+                attackTimer.reset();
         }
     }
 
