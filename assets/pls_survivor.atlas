@@ -69,19 +69,26 @@ bat_flying_down_white3
   index: -1
 bullet
   rotate: false
-  xy: 176, 75
+  xy: 210, 109
   size: 14, 1
   orig: 14, 1
   offset: 0, 0
   index: -1
 bulletFat
   rotate: false
-  xy: 142, 36
+  xy: 176, 70
   size: 14, 6
   orig: 14, 6
   offset: 0, 0
   index: -1
 m1garand
+  rotate: false
+  xy: 142, 36
+  size: 28, 6
+  orig: 28, 6
+  offset: 0, 0
+  index: -1
+m1garand_hands
   rotate: false
   xy: 2, 2
   size: 28, 6

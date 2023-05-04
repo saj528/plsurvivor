@@ -101,7 +101,7 @@ public class GameScreen implements Screen {
 
         parseMapLayerCollision(map, world);
 
-        enemyFactory = new EnemyFactory(Enemy.EnemyType.SimpleEnemy,100,.1f,mapPixelWidth,mapPixelHeight);
+        enemyFactory = new EnemyFactory(Enemy.EnemyType.SimpleEnemy,10,.1f,mapPixelWidth,mapPixelHeight);
 
     }
 
