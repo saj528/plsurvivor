@@ -39,7 +39,7 @@ public class M1911Weapon extends Weapon {
         weapon = new Sprite(spriteProcessor.getMiscTextureRegions().get("m1garand_hands"));
         weapon.setOriginCenter();
         weapon.setOrigin((weapon.getWidth() * .8f),(weapon.getHeight() / 2));
-        weapon.setRotation(0);
+        weapon.setRotation(90);
         weapon.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
 
 
@@ -58,12 +58,10 @@ public class M1911Weapon extends Weapon {
             angle = enemy.getBody().getPosition().sub(player.getPlayerBody().getPosition()).angleDeg();
         }
 
-
-        if(rotationAngle != angle){
-            rotationAngle = MathUtils.lerpAngleDeg(rotationAngle,angle - 180,.1f);
-        }
-        weapon.setRotation(90);
-
+/*        System.out.println(weapon.getRotation());
+        if(weapon.getRotation() != (int)angle){
+            weapon.rotate(1);
+        }*/
 
         if(rotationAngle % 360 == 270 || rotationAngle % 360 == 90){
             weapon.flip(false,true);

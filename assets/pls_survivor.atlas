@@ -4,205 +4,240 @@ size: 256, 128
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
+M1911A1
+  rotate: false
+  xy: 2, 93
+  size: 48, 30
+  orig: 48, 30
+  offset: 0, 0
+  index: -1
 bat_flying_down1
   rotate: false
-  xy: 70, 78
+  xy: 154, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down2
   rotate: false
-  xy: 36, 78
+  xy: 86, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down3
   rotate: false
-  xy: 104, 78
+  xy: 54, 46
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_red1
   rotate: false
-  xy: 2, 78
+  xy: 52, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_red2
   rotate: false
-  xy: 36, 10
+  xy: 188, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_red3
   rotate: false
-  xy: 2, 10
+  xy: 2, 5
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white1
   rotate: false
-  xy: 2, 44
+  xy: 2, 39
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white2
   rotate: false
-  xy: 70, 44
+  xy: 222, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white3
   rotate: false
-  xy: 36, 44
+  xy: 120, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 210, 109
+  xy: 2, 2
   size: 14, 1
   orig: 14, 1
   offset: 0, 0
   index: -1
 bulletFat
   rotate: false
-  xy: 176, 70
+  xy: 106, 39
   size: 14, 6
   orig: 14, 6
   offset: 0, 0
   index: -1
+kar98k
+  rotate: false
+  xy: 102, 81
+  size: 44, 8
+  orig: 44, 8
+  offset: 0, 0
+  index: -1
 m1garand
   rotate: false
-  xy: 142, 36
+  xy: 160, 49
   size: 28, 6
   orig: 28, 6
   offset: 0, 0
   index: -1
 m1garand_hands
   rotate: false
-  xy: 2, 2
+  xy: 54, 18
   size: 28, 6
   orig: 28, 6
   offset: 0, 0
   index: -1
+mg34
+  rotate: false
+  xy: 52, 80
+  size: 48, 9
+  orig: 48, 9
+  offset: 0, 0
+  index: -1
+mp40
+  rotate: false
+  xy: 54, 26
+  size: 32, 18
+  orig: 32, 18
+  offset: 0, 0
+  index: -1
+stg44
+  rotate: false
+  xy: 2, 73
+  size: 48, 18
+  orig: 48, 18
+  offset: 0, 0
+  index: -1
 walking_down1
   rotate: false
-  xy: 158, 44
+  xy: 232, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_down2
   rotate: false
-  xy: 106, 10
+  xy: 160, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_down4
   rotate: false
-  xy: 106, 10
+  xy: 160, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_down3
   rotate: false
-  xy: 192, 78
+  xy: 88, 12
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_left1
   rotate: false
-  xy: 156, 78
+  xy: 142, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_left3
   rotate: false
-  xy: 124, 10
+  xy: 214, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_left4
   rotate: false
-  xy: 138, 78
+  xy: 88, 46
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_left2
   rotate: false
-  xy: 138, 78
+  xy: 88, 46
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_right1
   rotate: false
-  xy: 122, 44
+  xy: 124, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_right3
   rotate: false
-  xy: 174, 78
+  xy: 196, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_right4
   rotate: false
-  xy: 104, 44
+  xy: 36, 5
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_right2
   rotate: false
-  xy: 104, 44
+  xy: 36, 5
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up1
   rotate: false
-  xy: 88, 10
+  xy: 106, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up3
   rotate: false
-  xy: 140, 44
+  xy: 178, 57
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up4
   rotate: false
-  xy: 70, 10
+  xy: 36, 39
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up2
   rotate: false
-  xy: 70, 10
+  xy: 36, 39
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
