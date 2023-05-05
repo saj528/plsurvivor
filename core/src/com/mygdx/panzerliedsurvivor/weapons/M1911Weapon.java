@@ -62,9 +62,16 @@ public class M1911Weapon extends Weapon {
 
         if(weapon.getRotation() % 360 != angle){
 
-            float targetAngle = (angle - weapon.getRotation() + 540) % 360 - 180;
+            //float targetAngle = (angle - weapon.getRotation() + 540) % 360 - 180;
+
+            float angleAlpha = angle - weapon.getRotation();
+            float angleBeta = angle - weapon.getRotation() + 360;
+            float angleTheta = angle - weapon.getRotation() - 360;
+
+            float targetAngle = Math.abs(Math.min(angleAlpha,Math.min(angleBeta,angleTheta))) % 360;
 
             float rotationSize = Math.abs(targetAngle) >= 5 ? 5 : Math.abs(targetAngle);
+
             System.out.println(Math.abs(targetAngle));
             if(targetAngle > 0){
                 weapon.rotate(0 - rotationSize);
