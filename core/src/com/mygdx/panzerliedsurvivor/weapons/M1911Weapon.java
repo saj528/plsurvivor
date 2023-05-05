@@ -60,23 +60,26 @@ public class M1911Weapon extends Weapon {
         }
 
 
-        if((int)weapon.getRotation() % 360 != (int)angle){
+        if(weapon.getRotation() % 360 != angle){
 
             float targetAngle = (angle - weapon.getRotation() + 540) % 360 - 180;
 
+            float rotationSize = Math.abs(targetAngle) >= 5 ? 5 : Math.abs(targetAngle);
+            System.out.println(Math.abs(targetAngle));
             if(targetAngle > 0){
-                weapon.rotate(-1f);
-            }else if(targetAngle <= 0){
-                weapon.rotate(1f);
+                weapon.rotate(0 - rotationSize);
+            }else{
+                weapon.rotate(rotationSize);
             }
 
         }
 
-        if(weapon.getRotation() % 360 == 270 || weapon.getRotation() % 360 == 90){
+/*        if(weapon.getRotation() % 360 == 270 || weapon.getRotation() % 360 == 90){
             weapon.flip(false,true);
-        }
+        }*/
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
         weapon.draw(batch);
+
         // -----
 
         if (currentAmmo == 0) {
