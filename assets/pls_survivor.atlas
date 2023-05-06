@@ -81,44 +81,114 @@ bullet
   orig: 14, 1
   offset: 0, 0
   index: -1
-bulletFat
+german_soldier_walking_down1
   rotate: false
-  xy: 106, 39
-  size: 14, 6
-  orig: 14, 6
+  xy: 36, 5
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_down2
+  rotate: false
+  xy: 194, 47
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_down4
+  rotate: false
+  xy: 194, 47
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_down3
+  rotate: false
+  xy: 140, 46
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_left1
+  rotate: false
+  xy: 90, 26
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_left2
+  rotate: false
+  xy: 122, 46
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_left4
+  rotate: false
+  xy: 122, 46
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_left3
+  rotate: false
+  xy: 212, 57
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_right1
+  rotate: false
+  xy: 230, 57
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_right2
+  rotate: false
+  xy: 176, 47
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_right4
+  rotate: false
+  xy: 176, 47
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: -1
+german_soldier_walking_right3
+  rotate: false
+  xy: 72, 12
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: -1
 kar98k
   rotate: false
-  xy: 102, 81
+  xy: 152, 81
   size: 44, 8
   orig: 44, 8
   offset: 0, 0
   index: -1
-m1garand
-  rotate: false
-  xy: 160, 49
-  size: 28, 6
-  orig: 28, 6
-  offset: 0, 0
-  index: -1
-m1garand_hands
-  rotate: false
-  xy: 54, 18
-  size: 28, 6
-  orig: 28, 6
-  offset: 0, 0
-  index: -1
-mg34
+m1_garand
   rotate: false
   xy: 52, 80
   size: 48, 9
   orig: 48, 9
   offset: 0, 0
   index: -1
+mg34
+  rotate: false
+  xy: 102, 80
+  size: 48, 9
+  orig: 48, 9
+  offset: 0, 0
+  index: -1
 mp40
   rotate: false
-  xy: 54, 26
+  xy: 88, 60
   size: 32, 18
   orig: 32, 18
   offset: 0, 0
@@ -130,100 +200,16 @@ stg44
   orig: 48, 18
   offset: 0, 0
   index: -1
-walking_down1
-  rotate: false
-  xy: 232, 57
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_down2
-  rotate: false
-  xy: 160, 57
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_down4
-  rotate: false
-  xy: 160, 57
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_down3
-  rotate: false
-  xy: 88, 12
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_left1
-  rotate: false
-  xy: 142, 47
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_left3
-  rotate: false
-  xy: 214, 57
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_left4
-  rotate: false
-  xy: 88, 46
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_left2
-  rotate: false
-  xy: 88, 46
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_right1
-  rotate: false
-  xy: 124, 47
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_right3
-  rotate: false
-  xy: 196, 57
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_right4
-  rotate: false
-  xy: 36, 5
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
-walking_right2
-  rotate: false
-  xy: 36, 5
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: -1
 walking_up1
   rotate: false
-  xy: 106, 47
+  xy: 54, 12
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up3
   rotate: false
-  xy: 178, 57
+  xy: 158, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0

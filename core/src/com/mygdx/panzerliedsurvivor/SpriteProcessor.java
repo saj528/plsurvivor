@@ -37,13 +37,13 @@ public class SpriteProcessor {
         textureAtlas = new TextureAtlas("pls_survivor.atlas");
 
         miscTextureRegions.put("bullet", textureAtlas.findRegion("bullet"));
-        miscTextureRegions.put("m1garand_hands", textureAtlas.findRegion("m1garand_hands"));
+        miscTextureRegions.put("kar98k", textureAtlas.findRegion("kar98k"));
 
 
-        playerWalkingDownTexReg = createSpriteTextureRegion("walking_down", 1, 4);
+        playerWalkingDownTexReg = createSpriteTextureRegion("german_soldier_walking_down", 1, 4);
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);
-        playerWalkingRightTexReg = createSpriteTextureRegion("walking_right", 1, 4);
-        playerWalkingLeftTexReg = createSpriteTextureRegion("walking_left", 1, 4);
+        playerWalkingRightTexReg = createSpriteTextureRegion("german_soldier_walking_right", 1, 4);
+        playerWalkingLeftTexReg = createSpriteTextureRegion("german_soldier_walking_left", 1, 4);
 
 
         playerIdleUpTexReg = new TextureRegion[1];
@@ -52,9 +52,9 @@ public class SpriteProcessor {
         playerIdleLeftTexReg = new TextureRegion[1];
 
         playerIdleUpTexReg[0] = textureAtlas.findRegion("walking_up4");
-        playerIdleDownTexReg[0] = textureAtlas.findRegion("walking_down4");
-        playerIdleRightTexReg[0] = textureAtlas.findRegion("walking_right4");
-        playerIdleLeftTexReg[0] = textureAtlas.findRegion("walking_left4");
+        playerIdleDownTexReg[0] = textureAtlas.findRegion("german_soldier_walking_down4");
+        playerIdleRightTexReg[0] = textureAtlas.findRegion("german_soldier_walking_right4");
+        playerIdleLeftTexReg[0] = textureAtlas.findRegion("german_soldier_walking_left4");
 
         playerWalkingDownAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingDownTexReg);
         playerWalkingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingUpTexReg);

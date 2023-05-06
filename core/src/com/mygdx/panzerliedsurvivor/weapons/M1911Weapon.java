@@ -36,11 +36,10 @@ public class M1911Weapon extends Weapon {
         spriteProcessor = GameComponentProvider.getSpriteProcessor();
         batch = GameComponentProvider.getSpriteBatch();
 
-        weapon = new Sprite(spriteProcessor.getMiscTextureRegions().get("m1garand_hands"));
+        weapon = new Sprite(spriteProcessor.getMiscTextureRegions().get("kar98k"));
         weapon.setOriginCenter();
+        weapon.scale(-.2f);
         weapon.setOrigin((weapon.getWidth() * .8f),(weapon.getHeight() / 2));
-        weapon.setRotation(0);
-        //weapon.flip(true,false);
         weapon.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
 
 
@@ -65,11 +64,13 @@ public class M1911Weapon extends Weapon {
             weapon.rotate(rotationSize);
         }
 
-        if (weapon.getRotation() % 360 >= 90 && weapon.getRotation() % 360 <= 270) {
+/*
+        if (weapon.getRotation() % 360 > 90 && weapon.getRotation() % 360 < 270) {
             weapon.setFlip(false, true);
-        } else {
+        }else{
             weapon.setFlip(false, false);
         }
+*/
 
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
         weapon.draw(batch);
