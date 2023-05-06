@@ -15,7 +15,8 @@ public class SpriteProcessor {
             playerIdleUpTexReg, playerIdleDownTexReg,
             playerIdleRightTexReg, playerIdleLeftTexReg,
             batEnemyFlyingDownTexReg, batEnemyFlyingUpTexReg,
-            batEnemyFlyingRightTexReg, batEnemyFlyingLeftTexReg;
+            batEnemyFlyingRightTexReg, batEnemyFlyingLeftTexReg,
+            kar98kFiringTexReg, muzzleFlashTexReg;
     private float playerWalkingAnimSpeed = 0.20f;
 
     private Animation<TextureRegion> playerWalkingDownAnim, playerWalkingUpAnim,
@@ -23,7 +24,8 @@ public class SpriteProcessor {
             playerIdleDownAnim, playerIdleUpAnim,
             playerIdleRightAnim, playerIdleLeftAnim,
             batEnemyFlyingDownAnim, batEnemyFlyingUpAnim,
-            batEnemyFlyingRightAnim, batEnemyFlyingLeftAnim;
+            batEnemyFlyingRightAnim, batEnemyFlyingLeftAnim,
+            kar98kFiringAnim, muzzleFlashAnim;
 
     private HashMap<String, Animation<TextureRegion>> animations;
 
@@ -44,6 +46,8 @@ public class SpriteProcessor {
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);
         playerWalkingRightTexReg = createSpriteTextureRegion("german_soldier_walking_right", 1, 4);
         playerWalkingLeftTexReg = createSpriteTextureRegion("german_soldier_walking_left", 1, 4);
+        muzzleFlashTexReg = createSpriteTextureRegion("muzzle_flash",1,3);
+        kar98kFiringTexReg = createSpriteTextureRegion("kar98k_firing",1,4);
 
 
         playerIdleUpTexReg = new TextureRegion[1];
@@ -60,6 +64,8 @@ public class SpriteProcessor {
         playerWalkingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingUpTexReg);
         playerWalkingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingRightTexReg);
         playerWalkingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingLeftTexReg);
+        muzzleFlashAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,muzzleFlashTexReg);
+        kar98kFiringAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,kar98kFiringTexReg);
 
         playerIdleUpAnim = new Animation<TextureRegion>(0, playerIdleUpTexReg);
         playerIdleDownAnim = new Animation<TextureRegion>(0, playerIdleDownTexReg);
@@ -93,6 +99,10 @@ public class SpriteProcessor {
         animations.put("batFlyingUp", batEnemyFlyingUpAnim);
         animations.put("batFlyingRight", batEnemyFlyingRightAnim);
         animations.put("batFlyingLeft", batEnemyFlyingLeftAnim);
+
+        //weapons
+        animations.put("muzzleFlash", muzzleFlashAnim);
+        animations.put("kar98kFiring",kar98kFiringAnim);
 
 
     }

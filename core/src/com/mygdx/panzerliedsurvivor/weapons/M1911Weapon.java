@@ -24,9 +24,6 @@ public class M1911Weapon extends Weapon {
     Sprite weapon;
     SpriteBatch batch;
 
-    float rotationAngle = 0;
-
-
     public M1911Weapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, int magSize,
                        float reloadSpeed, float range, float projectileDurability, Player player) {
         super(attackSpeed, projectileSpeed, sprite, damage, magSize, reloadSpeed, range, projectileDurability, player);
@@ -58,8 +55,9 @@ public class M1911Weapon extends Weapon {
             angle = player.getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
         }
 
-
         weapon.setRotation(angle);
+
+
 
 
         if (weapon.getRotation() % 360 > 90 && weapon.getRotation() % 360 < 270) {
