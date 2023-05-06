@@ -10,9 +10,12 @@ public class Timer {
 
     private float timeSinceLastTrigger;
 
+    private int numberOfTriggers;
+
     public Timer(float triggerTime) {
         this.triggerTime = triggerTime;
         this.timeSinceLastTrigger = 0f;
+        this.numberOfTriggers = 0;
     }
 
     /***
@@ -25,6 +28,7 @@ public class Timer {
         this.timeSinceLastTrigger += delta;
         if (timeSinceLastTrigger >= triggerTime) {
             timeSinceLastTrigger -= triggerTime;
+            numberOfTriggers++;
             return true;
         }
 
@@ -39,5 +43,17 @@ public class Timer {
      */
     public void reset() {
         this.timeSinceLastTrigger = 0;
+    }
+
+    public float getTimeSinceLastTrigger() {
+        return this.timeSinceLastTrigger;
+    }
+
+    public float getTriggerTime() {
+        return this.triggerTime;
+    }
+
+    public int getNumberOfTriggers() {
+        return this.numberOfTriggers;
     }
 }
