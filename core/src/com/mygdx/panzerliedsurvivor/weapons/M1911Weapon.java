@@ -53,37 +53,24 @@ public class M1911Weapon extends Weapon {
 
         Enemy enemy = EnemyUtils.getNearestEnemy(player.getPlayerBody().getPosition());
 
-        if(enemy == null){
+        if (enemy == null) {
             angle = 0;
-        }else{
-            angle = enemy.getBody().getPosition().sub(player.getPlayerBody().getPosition()).angleDeg();
+        } else {
+            angle = player.getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
         }
 
-
-        if(weapon.getRotation() % 360 != angle){
-
-            //float targetAngle = (angle - weapon.getRotation() + 540) % 360 - 180;
-
-            float angleAlpha = angle - weapon.getRotation();
-            float angleBeta = angle - weapon.getRotation() + 360;
-            float angleTheta = angle - weapon.getRotation() - 360;
-
-            float targetAngle = Math.abs(Math.min(angleAlpha,Math.min(angleBeta,angleTheta))) % 360;
-
-            float rotationSize = Math.abs(targetAngle) >= 5 ? 5 : Math.abs(targetAngle);
-
-            System.out.println(Math.abs(targetAngle));
-            if(targetAngle > 0){
-                weapon.rotate(0 - rotationSize);
-            }else{
-                weapon.rotate(rotationSize);
-            }
-
+        float targetAngle = (angle - weapon.getRotation() + 180) % 360 - 180;
+        if (Math.abs(targetAngle) > 1) {
+            float rotationSize = Math.signum(targetAngle) * Math.min(5, Math.abs(targetAngle));
+            weapon.rotate(rotationSize);
         }
 
-/*        if(weapon.getRotation() % 360 == 270 || weapon.getRotation() % 360 == 90){
-            weapon.flip(false,true);
-        }*/
+        if (weapon.getRotation() % 360 >= 90 && weapon.getRotation() % 360 <= 270) {
+            weapon.setFlip(false, true);
+        } else {
+            weapon.setFlip(false, false);
+        }
+
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
         weapon.draw(batch);
 
