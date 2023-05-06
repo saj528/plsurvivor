@@ -50,7 +50,7 @@ public class M1911Weapon extends Weapon {
 
         //weapon sprite stuff
 
-        Enemy enemy = EnemyUtils.getNearestEnemy(player.getPlayerBody().getPosition());
+        Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(player.getPlayerBody().getPosition(), range);
 
         if (enemy == null) {
             angle = 0;
@@ -58,19 +58,16 @@ public class M1911Weapon extends Weapon {
             angle = player.getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
         }
 
-        float targetAngle = (angle - weapon.getRotation() + 180) % 360 - 180;
-        if (Math.abs(targetAngle) > 1) {
-            float rotationSize = Math.signum(targetAngle) * Math.min(5, Math.abs(targetAngle));
-            weapon.rotate(rotationSize);
-        }
 
-/*
+        weapon.setRotation(angle);
+
+
         if (weapon.getRotation() % 360 > 90 && weapon.getRotation() % 360 < 270) {
             weapon.setFlip(false, true);
         }else{
             weapon.setFlip(false, false);
         }
-*/
+
 
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
         weapon.draw(batch);
@@ -86,7 +83,6 @@ public class M1911Weapon extends Weapon {
 
         if (currentAmmo > 0 && attackTimer.updateTimerAndCheckCompletion(delta)) {
             fire();
-            currentAmmo--;
             if (currentAmmo == 0)
                 attackTimer.reset();
         }
@@ -99,6 +95,7 @@ public class M1911Weapon extends Weapon {
         Vector2 direction = target.getBody().getPosition().sub(player.getPlayerBody().getPosition()).nor().scl(projectileSpeed);
         Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
+        currentAmmo--;
     }
 
 }
