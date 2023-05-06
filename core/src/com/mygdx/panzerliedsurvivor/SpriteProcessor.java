@@ -37,7 +37,7 @@ public class SpriteProcessor {
         textureAtlas = new TextureAtlas("pls_survivor.atlas");
 
         miscTextureRegions.put("bullet", textureAtlas.findRegion("bullet"));
-        miscTextureRegions.put("m1garand", textureAtlas.findRegion("m1garand"));
+        miscTextureRegions.put("m1garand_hands", textureAtlas.findRegion("m1garand_hands"));
 
 
         playerWalkingDownTexReg = createSpriteTextureRegion("walking_down", 1, 4);
@@ -79,11 +79,11 @@ public class SpriteProcessor {
 
 
         //player
-        animations.put("playerWalkingUp", playerWalkingUpAnim);
+        animations.put("playerWalkingUp", playerWalkingDownAnim);
         animations.put("playerWalkingDown", playerWalkingDownAnim);
         animations.put("playerWalkingRight", playerWalkingRightAnim);
         animations.put("playerWalkingLeft", playerWalkingLeftAnim);
-        animations.put("playerIdleUp", playerIdleUpAnim);
+        animations.put("playerIdleUp", playerIdleDownAnim);
         animations.put("playerIdleDown", playerIdleDownAnim);
         animations.put("playerIdleRight", playerIdleRightAnim);
         animations.put("playerIdleLeft", playerIdleLeftAnim);
