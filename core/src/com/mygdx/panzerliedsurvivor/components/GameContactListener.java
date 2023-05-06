@@ -3,6 +3,7 @@ package com.mygdx.panzerliedsurvivor.components;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.panzerliedsurvivor.Player;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
+import com.mygdx.panzerliedsurvivor.utils.Constants;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
 
 public class GameContactListener implements ContactListener {
@@ -53,6 +54,8 @@ public class GameContactListener implements ContactListener {
         if (bullet.getDurability() <= 0) {
             bullet.kill();
         }
+
+        FloatingText.createFloatingText(String.valueOf(damage), 1f, enemy.getBody().getPosition().scl(Constants.PPM));
     }
 
     private void handlePlayerEnemyContact(Player player, Enemy enemy) {

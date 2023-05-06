@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.panzerliedsurvivor.components.FloatingText;
 import com.mygdx.panzerliedsurvivor.components.GameContactListener;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.SpriteProcessor;
@@ -34,7 +35,13 @@ public class GameComponentProvider {
 
     private static Set<Enemy> enemiesToDelete = new HashSet<>();
 
+    private static Set<FloatingText> floatingTexts = new HashSet<>();
+
+    private static Set<FloatingText> floatingTextsToDelete = new HashSet<>();
+
     private static Player player;
+
+    private static TextWriter textWriter;
 
     public static World getGameWorld() {
 
@@ -70,6 +77,13 @@ public class GameComponentProvider {
         return camera;
     }
 
+    public static TextWriter getTextWriter() {
+        if (textWriter == null) {
+            textWriter = new TextWriter();
+        }
+        return textWriter;
+    }
+
     public static Set<Bullet> getBullets() {
         return bullets;
     }
@@ -102,6 +116,18 @@ public class GameComponentProvider {
         return player;
     }
 
+    public static Set<FloatingText> getFloatingTexts() {
+        return floatingTexts;
+    }
+
+    public static void addFloatingText(FloatingText text) {
+        floatingTexts.add(text);
+    }
+
+    public static void deleteFloatingText(FloatingText text) {
+        floatingTextsToDelete.add(text);
+    }
+
     public static void cleanObjects() {
         for(Enemy enemy : enemiesToDelete) {
             gameWorld.destroyBody(enemy.getBody());
@@ -114,5 +140,7 @@ public class GameComponentProvider {
         }
         bullets.removeAll(bulletsToDelete);
         bulletsToDelete.clear();
+
+        floatingTexts.removeAll(floatingTextsToDelete);
     }
 }

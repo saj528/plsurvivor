@@ -16,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.panzerliedsurvivor.components.FloatingText;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
@@ -152,6 +153,11 @@ public class GameScreen implements Screen {
         for (Enemy enemy : GameComponentProvider.getEnemies()) {
             enemy.update(delta);
             enemy.render(delta);
+        }
+
+        for (FloatingText text : GameComponentProvider.getFloatingTexts()) {
+            text.update(delta);
+            text.render(delta);
         }
 
         batch.end();
