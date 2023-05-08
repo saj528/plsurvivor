@@ -24,6 +24,11 @@ public class M1911Weapon extends Weapon {
     SpriteProcessor spriteProcessor;
 
     Sprite weapon;
+
+    Vector2 muzzleOffset;
+
+    Vector2 muzzleLocation;
+
     SpriteBatch batch;
 
     ShapeRenderer shapeRenderer;
@@ -43,7 +48,8 @@ public class M1911Weapon extends Weapon {
         weapon.scale(-.3f);
         weapon.setOrigin((weapon.getWidth() * .8f),(weapon.getHeight() / 2));
         weapon.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
-
+        muzzleOffset = new Vector2(-25, 0);
+        muzzleLocation = new Vector2();
 
     }
 
@@ -64,23 +70,43 @@ public class M1911Weapon extends Weapon {
 
         if (weapon.getRotation() % 360 > 90 && weapon.getRotation() % 360 < 270) {
             weapon.setFlip(false, true);
+            // The barrel isn't centered in the image so the y offset depends on whether the image is flipped or not
+            muzzleOffset.y = -1;
         }else{
             weapon.setFlip(false, false);
+            muzzleOffset.y = 1;
         }
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
 
-        shapeRenderer.setProjectionMatrix(GameComponentProvider.getCamera().combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(weapon.getBoundingRectangle().x,weapon.getBoundingRectangle().y,weapon.getBoundingRectangle().width,weapon.getBoundingRectangle().height);
-        shapeRenderer.end();
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.circle(weapon.getX(),weapon.getY(),3f);
-        shapeRenderer.end();
 
         weapon.draw(batch);
+
+        Vector2 weaponCenter = new Vector2(weapon.getX() + weapon.getOriginX(),weapon.getY() + weapon.getOriginY());
+
+
+        muzzleLocation = new Vector2(weaponCenter).add(muzzleOffset).rotateAroundDeg(weaponCenter, angle);
+
+
+//        shapeRenderer.setProjectionMatrix(GameComponentProvider.getCamera().combined);
+////        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+////        shapeRenderer.setColor(Color.RED);
+////        shapeRenderer.rect(weapon.getBoundingRectangle().x,weapon.getBoundingRectangle().y,weapon.getBoundingRectangle().width,weapon.getBoundingRectangle().height);
+////        shapeRenderer.end();
+//
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.ORANGE);
+//        shapeRenderer.circle(weapon.getX() + weapon.getOriginX(),weapon.getY() + weapon.getOriginY(),6f);
+//        shapeRenderer.end();
+//
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.GREEN);
+//        shapeRenderer.circle(weaponCenter.x, weaponCenter.y, 10f);
+//        shapeRenderer.end();
+//
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.BLUE);
+//        shapeRenderer.circle(muzzleLocation.x, muzzleLocation.y, 5f);
+//        shapeRenderer.end();
 
 
         // -----
@@ -103,10 +129,9 @@ public class M1911Weapon extends Weapon {
         Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.player.getPlayerBody().getPosition(), range);
         if (target == null)
             return;
-        Vector2 direction = target.getBody().getPosition().sub(player.getPlayerBody().getPosition()).nor().scl(projectileSpeed);
-        System.out.println(weapon.getX());
-        Vector2 weaponVectorOffset = new Vector2(22 / PPM,4 / PPM).rotateDeg(angle);
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition().sub(weaponVectorOffset), direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Vector2 muzzleLocationMeters = new Vector2(muzzleLocation).scl(1/PPM);
+        Vector2 direction = target.getBody().getPosition().sub(muzzleLocationMeters).nor().scl(projectileSpeed);
+        Bullet bullet = new Bullet(damage, muzzleLocationMeters, direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;
     }
