@@ -1,8 +1,10 @@
 package com.mygdx.panzerliedsurvivor.weapons;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.panzerliedsurvivor.Player;
@@ -24,6 +26,8 @@ public class M1911Weapon extends Weapon {
     Sprite weapon;
     SpriteBatch batch;
 
+    ShapeRenderer shapeRenderer;
+
     public M1911Weapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, int magSize,
                        float reloadSpeed, float range, float projectileDurability, Player player) {
         super(attackSpeed, projectileSpeed, sprite, damage, magSize, reloadSpeed, range, projectileDurability, player);
@@ -32,10 +36,11 @@ public class M1911Weapon extends Weapon {
 
         spriteProcessor = GameComponentProvider.getSpriteProcessor();
         batch = GameComponentProvider.getSpriteBatch();
+        shapeRenderer = GameComponentProvider.getShapeRenderer();
 
         weapon = new Sprite(spriteProcessor.getMiscTextureRegions().get("kar98k"));
         weapon.setOriginCenter();
-        weapon.scale(-.2f);
+        weapon.scale(-.3f);
         weapon.setOrigin((weapon.getWidth() * .8f),(weapon.getHeight() / 2));
         weapon.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
 
@@ -57,18 +62,26 @@ public class M1911Weapon extends Weapon {
 
         weapon.setRotation(angle);
 
-
-
-
         if (weapon.getRotation() % 360 > 90 && weapon.getRotation() % 360 < 270) {
             weapon.setFlip(false, true);
         }else{
             weapon.setFlip(false, false);
         }
-
-
         weapon.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8,(player.getPlayerBody().getPosition().y * PPM) - 4);
+
+        shapeRenderer.setProjectionMatrix(GameComponentProvider.getCamera().combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(weapon.getBoundingRectangle().x,weapon.getBoundingRectangle().y,weapon.getBoundingRectangle().width,weapon.getBoundingRectangle().height);
+        shapeRenderer.end();
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.circle(weapon.getX(),weapon.getY(),3f);
+        shapeRenderer.end();
+
         weapon.draw(batch);
+
 
         // -----
 
@@ -91,7 +104,9 @@ public class M1911Weapon extends Weapon {
         if (target == null)
             return;
         Vector2 direction = target.getBody().getPosition().sub(player.getPlayerBody().getPosition()).nor().scl(projectileSpeed);
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        System.out.println(weapon.getX());
+        Vector2 weaponVectorOffset = new Vector2(22 / PPM,4 / PPM).rotateDeg(angle);
+        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition().sub(weaponVectorOffset), direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;
     }
