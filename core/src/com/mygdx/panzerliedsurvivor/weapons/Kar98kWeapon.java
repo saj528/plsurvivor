@@ -11,15 +11,17 @@ import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.getSpriteProcessor;
 
-public class M1911Weapon extends Weapon {
+public class Kar98kWeapon extends Weapon {
+
+
 
     float angle;
 
     Vector2 muzzleLocation;
 
-    public M1911Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
-                       float reloadSpeed, float range, float projectileDurability, Player player,
-                       float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
+    public Kar98kWeapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
+                        float reloadSpeed, float range, float projectileDurability, Player player,
+                        float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
         super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
                 , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
 
@@ -33,7 +35,6 @@ public class M1911Weapon extends Weapon {
         muzzleLocation = new Vector2();
 
     }
-
 
     @Override
     public void render(float delta, SpriteBatch batch) {
@@ -51,14 +52,12 @@ public class M1911Weapon extends Weapon {
         if (weaponSprite.getRotation() % 360 > 90 && weaponSprite.getRotation() % 360 < 270) {
             weaponSprite.setFlip(false, true);
             // The barrel isn't centered in the image so the y offset depends on whether the image is flipped or not
-            muzzleOffset.y = -2;
-            weaponOffsetX = 10;
+            muzzleOffset.y = -1;
         } else {
             weaponSprite.setFlip(false, false);
-            muzzleOffset.y = 2;
-            weaponOffsetX = 20;
+            muzzleOffset.y = 1;
         }
-        weaponSprite.setCenter((player.getPlayerBody().getPosition().x * PPM) - weaponOffsetX, (player.getPlayerBody().getPosition().y * PPM) - weaponOffsetY);
+        weaponSprite.setCenter((player.getPlayerBody().getPosition().x * PPM) - 8, (player.getPlayerBody().getPosition().y * PPM) - 4);
 
         weaponSprite.draw(batch);
 
@@ -96,6 +95,5 @@ public class M1911Weapon extends Weapon {
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;
     }
-
 
 }

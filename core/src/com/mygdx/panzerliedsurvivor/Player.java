@@ -26,17 +26,11 @@ public class Player {
     private SpriteBatch batch;
     private SpriteProcessor spriteProcessor;
 
-    //private Rectangle playerBoundingBox;
-
     private float walkingTimer;
 
     private Animation<TextureRegion> currentAnimation;
 
     private String direction;
-
-    private MapObjects mapObjects;
-
-    private Rectangle playerUseBox;
 
     private Body playerBody;
 
@@ -49,8 +43,6 @@ public class Player {
         this.batch = batch;
 
         this.spriteProcessor = spriteProcessor;
-
-        this.mapObjects = mapObjects;
 
         this.playerBody = playerBody;
 
@@ -74,6 +66,7 @@ public class Player {
 
         for (Weapon weapon : weapons) {
             weapon.update(delta);
+            weapon.render(delta, batch);
         }
 
     }
@@ -143,10 +136,6 @@ public class Player {
 
     public Body getPlayerBody() {
         return playerBody;
-    }
-
-    public Rectangle getPlayerUseBox() {
-        return playerUseBox;
     }
 
     public boolean isPlayerUsing() {

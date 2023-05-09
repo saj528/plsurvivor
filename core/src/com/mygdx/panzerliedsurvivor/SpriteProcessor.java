@@ -40,6 +40,7 @@ public class SpriteProcessor {
 
         miscTextureRegions.put("bullet", textureAtlas.findRegion("bullet"));
         miscTextureRegions.put("kar98k", textureAtlas.findRegion("kar98k"));
+        miscTextureRegions.put("m1911", textureAtlas.findRegion("M1911A1"));
 
 
         playerWalkingDownTexReg = createSpriteTextureRegion("german_soldier_walking_down", 1, 4);

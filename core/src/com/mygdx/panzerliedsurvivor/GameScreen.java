@@ -20,6 +20,7 @@ import com.mygdx.panzerliedsurvivor.components.FloatingText;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
+import com.mygdx.panzerliedsurvivor.weapons.Kar98kWeapon;
 
 import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerBoxBody;
 import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerCircleBody;
@@ -58,8 +59,6 @@ public class GameScreen implements Screen {
     private TiledMap map;
 
     private World world;
-
-
 
     public GameScreen() {
 
@@ -144,6 +143,8 @@ public class GameScreen implements Screen {
         batch.begin();
 
         player.renderAndUpdate(delta);
+
+
 
         for (Bullet b : GameComponentProvider.getBullets()) {
             b.update(delta);
