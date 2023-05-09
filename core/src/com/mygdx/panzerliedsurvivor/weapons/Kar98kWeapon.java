@@ -66,7 +66,6 @@ public class Kar98kWeapon extends Weapon {
         }
 
         if (firing) {
-
             currentAnimSprite = kar98kfiring.getKeyFrame(animTimer);
             if (kar98kfiring.isAnimationFinished(animTimer)) {
                 firing = false;
