@@ -6,21 +6,21 @@ filter: Nearest, Nearest
 repeat: none
 M1911A1
   rotate: false
-  xy: 2, 93
+  xy: 2, 95
   size: 48, 30
   orig: 48, 30
   offset: 0, 0
   index: -1
 bat_flying_down1
   rotate: false
-  xy: 154, 91
+  xy: 154, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down2
   rotate: false
-  xy: 86, 91
+  xy: 86, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -34,49 +34,49 @@ bat_flying_down3
   index: -1
 bat_flying_down_red1
   rotate: false
-  xy: 52, 91
+  xy: 52, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_red2
   rotate: false
-  xy: 188, 91
+  xy: 188, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_red3
   rotate: false
-  xy: 2, 5
+  xy: 2, 7
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white1
   rotate: false
-  xy: 2, 39
+  xy: 2, 41
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white2
   rotate: false
-  xy: 222, 91
+  xy: 222, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bat_flying_down_white3
   rotate: false
-  xy: 120, 91
+  xy: 120, 93
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 36, 70
+  xy: 36, 72
   size: 14, 1
   orig: 14, 1
   offset: 0, 0
@@ -90,28 +90,28 @@ german_soldier_walking_down1
   index: -1
 german_soldier_walking_down2
   rotate: false
-  xy: 142, 2
+  xy: 232, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_down4
   rotate: false
-  xy: 142, 2
+  xy: 232, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_down3
   rotate: false
-  xy: 70, 2
+  xy: 142, 35
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_left1
   rotate: false
-  xy: 142, 36
+  xy: 214, 47
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
@@ -132,28 +132,28 @@ german_soldier_walking_left4
   index: -1
 german_soldier_walking_left3
   rotate: false
-  xy: 160, 47
+  xy: 70, 2
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_right1
   rotate: false
-  xy: 160, 13
+  xy: 88, 2
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_right2
   rotate: false
-  xy: 124, 2
+  xy: 196, 35
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 german_soldier_walking_right4
   rotate: false
-  xy: 124, 2
+  xy: 196, 35
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
@@ -167,49 +167,49 @@ german_soldier_walking_right3
   index: -1
 kar98k
   rotate: false
-  xy: 99, 70
-  size: 44, 8
-  orig: 44, 8
-  offset: 0, 0
-  index: -1
-kar98k_firing2
-  rotate: false
-  xy: 52, 70
-  size: 45, 8
-  orig: 45, 8
-  offset: 0, 0
-  index: -1
-kar98k_firing3
-  rotate: false
-  xy: 199, 81
-  size: 45, 8
-  orig: 45, 8
-  offset: 0, 0
-  index: -1
-kar98k_firing4
-  rotate: false
-  xy: 152, 81
-  size: 45, 8
-  orig: 45, 8
+  xy: 202, 81
+  size: 48, 10
+  orig: 48, 10
   offset: 0, 0
   index: -1
 kar98k_firing1
   rotate: false
+  xy: 102, 81
+  size: 48, 10
+  orig: 48, 10
+  offset: 0, 0
+  index: -1
+kar98k_firing2
+  rotate: false
+  xy: 152, 69
+  size: 48, 10
+  orig: 48, 10
+  offset: 0, 0
+  index: -1
+kar98k_firing3
+  rotate: false
   xy: 152, 81
-  size: 45, 8
-  orig: 45, 8
+  size: 48, 10
+  orig: 48, 10
+  offset: 0, 0
+  index: -1
+kar98k_firing4
+  rotate: false
+  xy: 52, 81
+  size: 48, 10
+  orig: 48, 10
   offset: 0, 0
   index: -1
 m1_garand
   rotate: false
-  xy: 52, 80
+  xy: 52, 70
   size: 48, 9
   orig: 48, 9
   offset: 0, 0
   index: -1
 mg34
   rotate: false
-  xy: 102, 80
+  xy: 102, 70
   size: 48, 9
   orig: 48, 9
   offset: 0, 0
@@ -223,42 +223,42 @@ mp40
   index: -1
 muzzle_flash1
   rotate: false
-  xy: 178, 70
+  xy: 106, 25
   size: 11, 9
   orig: 11, 9
   offset: 0, 0
   index: -1
 muzzle_flash2
   rotate: false
-  xy: 36, 5
+  xy: 214, 36
   size: 11, 9
   orig: 11, 9
   offset: 0, 0
   index: -1
 muzzle_flash3
   rotate: false
-  xy: 160, 2
+  xy: 202, 70
   size: 10, 9
   orig: 10, 9
   offset: 0, 0
   index: -1
 stg44
   rotate: false
-  xy: 2, 73
+  xy: 2, 75
   size: 48, 18
   orig: 48, 18
   offset: 0, 0
   index: -1
 walking_up1
   rotate: false
-  xy: 88, 2
+  xy: 160, 35
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: -1
 walking_up3
   rotate: false
-  xy: 106, 2
+  xy: 178, 35
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
