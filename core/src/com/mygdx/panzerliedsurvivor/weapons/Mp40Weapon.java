@@ -1,5 +1,7 @@
 package com.mygdx.panzerliedsurvivor.weapons;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.panzerliedsurvivor.Player;
@@ -17,9 +19,16 @@ public class Mp40Weapon extends Weapon {
 
     Random random = new Random();
 
-    public Mp40Weapon(float attackSpeed, float projectileSpeed, TextureRegion sprite, int damage, int magSize,
-                       float reloadSpeed, float range, float projectileDurability, Player player) {
-        super(attackSpeed, projectileSpeed, sprite, damage, magSize, reloadSpeed, range, projectileDurability, player);
+    public Mp40Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
+                      float reloadSpeed, float range, float projectileDurability, Player player,
+                      float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
+        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
+                , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
+    }
+
+    @Override
+    public void render(float delta, SpriteBatch batch) {
+
     }
 
     @Override
