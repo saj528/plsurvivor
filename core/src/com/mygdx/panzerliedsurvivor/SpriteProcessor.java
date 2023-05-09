@@ -2,6 +2,7 @@ package com.mygdx.panzerliedsurvivor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -24,17 +25,21 @@ public class SpriteProcessor {
             playerIdleDownAnim, playerIdleUpAnim,
             playerIdleRightAnim, playerIdleLeftAnim,
             batEnemyFlyingDownAnim, batEnemyFlyingUpAnim,
-            batEnemyFlyingRightAnim, batEnemyFlyingLeftAnim,
-            kar98kFiringAnim, muzzleFlashAnim;
+            batEnemyFlyingRightAnim, batEnemyFlyingLeftAnim;
+
+    private Animation<Sprite> kar98kFiringAnim, muzzleFlashAnim;
 
     private HashMap<String, Animation<TextureRegion>> animations;
 
     private HashMap<String, TextureRegion> miscTextureRegions;
 
+    private HashMap<String, Animation<Sprite>> spriteAnimations;
+
     public SpriteProcessor() {
 
         animations = new HashMap<>();
         miscTextureRegions = new HashMap<>();
+        spriteAnimations = new HashMap<>();
 
         textureAtlas = new TextureAtlas("pls_survivor.atlas");
 
@@ -47,9 +52,8 @@ public class SpriteProcessor {
         playerWalkingUpTexReg = createSpriteTextureRegion("walking_up", 1, 4);
         playerWalkingRightTexReg = createSpriteTextureRegion("german_soldier_walking_right", 1, 4);
         playerWalkingLeftTexReg = createSpriteTextureRegion("german_soldier_walking_left", 1, 4);
-        muzzleFlashTexReg = createSpriteTextureRegion("muzzle_flash",1,3);
-        kar98kFiringTexReg = createSpriteTextureRegion("kar98k_firing",1,4);
-
+        muzzleFlashTexReg = createSpriteTextureRegion("muzzle_flash", 1, 3);
+        kar98kFiringTexReg = createSpriteTextureRegion("kar98k_firing", 1, 4);
 
         playerIdleUpTexReg = new TextureRegion[1];
         playerIdleDownTexReg = new TextureRegion[1];
@@ -65,8 +69,12 @@ public class SpriteProcessor {
         playerWalkingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingUpTexReg);
         playerWalkingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingRightTexReg);
         playerWalkingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingLeftTexReg);
-        muzzleFlashAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,muzzleFlashTexReg);
-        kar98kFiringAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,kar98kFiringTexReg);
+
+
+        Sprite[] kar98kSprites = texRegArrToSpriteArr(kar98kFiringTexReg);
+
+        muzzleFlashAnim = new Animation<Sprite>(playerWalkingAnimSpeed, texRegArrToSpriteArr(muzzleFlashTexReg));
+        kar98kFiringAnim = new Animation<Sprite>(playerWalkingAnimSpeed, kar98kSprites);
 
         playerIdleUpAnim = new Animation<TextureRegion>(0, playerIdleUpTexReg);
         playerIdleDownAnim = new Animation<TextureRegion>(0, playerIdleDownTexReg);
@@ -79,10 +87,10 @@ public class SpriteProcessor {
         batEnemyFlyingLeftTexReg = createSpriteTextureRegion("bat_flying_left", 1, 3);
 
 
-        batEnemyFlyingDownAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingDownTexReg);
-        batEnemyFlyingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingUpTexReg);
-        batEnemyFlyingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingRightTexReg);
-        batEnemyFlyingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed,batEnemyFlyingLeftTexReg);
+        batEnemyFlyingDownAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, batEnemyFlyingDownTexReg);
+        batEnemyFlyingUpAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, batEnemyFlyingUpTexReg);
+        batEnemyFlyingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, batEnemyFlyingRightTexReg);
+        batEnemyFlyingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, batEnemyFlyingLeftTexReg);
 
 
         //player
@@ -102,8 +110,9 @@ public class SpriteProcessor {
         animations.put("batFlyingLeft", batEnemyFlyingLeftAnim);
 
         //weapons
-        animations.put("muzzleFlash", muzzleFlashAnim);
-        animations.put("kar98kFiring",kar98kFiringAnim);
+        //animations.put("muzzleFlash", muzzleFlashAnim);
+        spriteAnimations.put("muzzleFlash", muzzleFlashAnim);
+        spriteAnimations.put("kar98kFiring", kar98kFiringAnim);
 
 
     }
@@ -117,11 +126,25 @@ public class SpriteProcessor {
         return tempTextureRegion;
     }
 
+    public Sprite[] texRegArrToSpriteArr(TextureRegion[] texRegArray) {
+        Sprite[] tempSprites = new Sprite[texRegArray.length];
+
+        int count = 0;
+        for (TextureRegion texReg : texRegArray) {
+            tempSprites[count++] = new Sprite(texReg);
+        }
+        return tempSprites;
+    }
+
     public HashMap<String, Animation<TextureRegion>> getAnimations() {
         return animations;
     }
 
     public HashMap<String, TextureRegion> getMiscTextureRegions() {
         return miscTextureRegions;
+    }
+
+    public HashMap<String, Animation<Sprite>> getSpriteAnimations() {
+        return spriteAnimations;
     }
 }

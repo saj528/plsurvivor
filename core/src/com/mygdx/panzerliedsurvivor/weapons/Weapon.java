@@ -106,7 +106,7 @@ public abstract class Weapon {
                 originX = .8f;
                 originY = weaponSprite.getHeight() / 2;
                 muzzleOffset = new Vector2(-25, 0);
-                weaponOffsetX = 8;
+                weaponOffsetX = 10;
                 weaponOffsetY = 4;
                 weapon = new Kar98kWeapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player,
                         weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
