@@ -78,6 +78,7 @@ public class Kar98kWeapon extends Weapon {
             }
 
             if (!muzzleFlashAnim.isAnimationFinished(muzzleAnimTimer)) {
+
                 muzzleFlashAnim.getKeyFrame(muzzleAnimTimer).draw(batch);
             }
 
@@ -92,7 +93,7 @@ public class Kar98kWeapon extends Weapon {
         currentWeaponAnimSprite = updateSprite(currentWeaponAnimSprite);
 
         currentWeaponAnimSprite.draw(batch);
-        muzzleFlashAnim.getKeyFrame(weaponAnimTimer, true).draw(batch);
+        //muzzleFlashAnim.getKeyFrame(weaponAnimTimer, true).draw(batch);
         Vector2 weaponCenter = new Vector2(weaponSprite.getX() + weaponSprite.getOriginX(), weaponSprite.getY() + weaponSprite.getOriginY());
 
         muzzleLocation = new Vector2(weaponCenter).add(muzzleOffset).rotateAroundDeg(weaponCenter, angle);
