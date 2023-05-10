@@ -78,7 +78,6 @@ public class Kar98kWeapon extends Weapon {
             }
 
             if (!muzzleFlashAnim.isAnimationFinished(muzzleAnimTimer)) {
-
                 muzzleFlashAnim.getKeyFrame(muzzleAnimTimer).draw(batch);
             }
 
