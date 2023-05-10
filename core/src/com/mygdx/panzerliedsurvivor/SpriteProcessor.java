@@ -70,11 +70,8 @@ public class SpriteProcessor {
         playerWalkingRightAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingRightTexReg);
         playerWalkingLeftAnim = new Animation<TextureRegion>(playerWalkingAnimSpeed, playerWalkingLeftTexReg);
 
-
-        Sprite[] kar98kSprites = texRegArrToSpriteArr(kar98kFiringTexReg);
-
         muzzleFlashAnim = new Animation<Sprite>(playerWalkingAnimSpeed, texRegArrToSpriteArr(muzzleFlashTexReg));
-        kar98kFiringAnim = new Animation<Sprite>(playerWalkingAnimSpeed, kar98kSprites);
+        kar98kFiringAnim = new Animation<Sprite>(playerWalkingAnimSpeed, texRegArrToSpriteArr(kar98kFiringTexReg));
 
         playerIdleUpAnim = new Animation<TextureRegion>(0, playerIdleUpTexReg);
         playerIdleDownAnim = new Animation<TextureRegion>(0, playerIdleDownTexReg);
