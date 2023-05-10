@@ -9,8 +9,6 @@ import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.EnemyUtils;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
-import java.util.Arrays;
-
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.getSpriteProcessor;
 
@@ -21,13 +19,17 @@ public class Kar98kWeapon extends Weapon {
 
     Vector2 muzzleLocation;
 
-    Animation<Sprite> kar98kfiring = GameComponentProvider.getSpriteProcessor().getSpriteAnimations().get("kar98kFiring");
+    Animation<Sprite> kar98kFiringAnim = GameComponentProvider.getSpriteProcessor().getSpriteAnimations().get("kar98kFiring");
+    Animation<Sprite> muzzleFlashAnim = GameComponentProvider.getSpriteProcessor().getSpriteAnimations().get("muzzleFlash");
 
-    float animTimer;
+    float weaponAnimTimer;
+    float muzzleAnimTimer;
 
     boolean firing = false;
+    boolean muzzleFiring = false;
 
-    Sprite currentAnimSprite;
+    Sprite currentWeaponAnimSprite;
+
 
     public Kar98kWeapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
                         float reloadSpeed, float range, float projectileDurability, Player player,
@@ -39,13 +41,14 @@ public class Kar98kWeapon extends Weapon {
 
         weaponSprite = initializeSprite(weaponSprite);
 
-        for (Sprite tempSprite : kar98kfiring.getKeyFrames()) {
+        for (Sprite tempSprite : kar98kFiringAnim.getKeyFrames()) {
             tempSprite = initializeSprite(tempSprite);
         }
 
-        currentAnimSprite = weaponSprite;
+        currentWeaponAnimSprite = weaponSprite;
 
-        animTimer = 0;
+        weaponAnimTimer = 0;
+        muzzleAnimTimer = 0;
 
         muzzleLocation = new Vector2();
 
@@ -55,8 +58,8 @@ public class Kar98kWeapon extends Weapon {
     public void render(float delta, SpriteBatch batch) {
 
 
-        animTimer += delta;
-
+        weaponAnimTimer += delta;
+        muzzleAnimTimer += delta;
         Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(player.getPlayerBody().getPosition(), range);
 
         if (enemy == null) {
@@ -66,19 +69,30 @@ public class Kar98kWeapon extends Weapon {
         }
 
         if (firing) {
-            currentAnimSprite = kar98kfiring.getKeyFrame(animTimer);
-            if (kar98kfiring.isAnimationFinished(animTimer)) {
+
+            currentWeaponAnimSprite = kar98kFiringAnim.getKeyFrame(weaponAnimTimer);
+
+            for (Sprite tempSprite : muzzleFlashAnim.getKeyFrames()) {
+                tempSprite.setRotation(angle);
+                tempSprite.setCenter(muzzleLocation.x, muzzleLocation.y);
+            }
+
+            if (!muzzleFlashAnim.isAnimationFinished(muzzleAnimTimer)) {
+                muzzleFlashAnim.getKeyFrame(muzzleAnimTimer).draw(batch);
+            }
+
+            if (kar98kFiringAnim.isAnimationFinished(weaponAnimTimer)) {
                 firing = false;
             }
         } else {
-            currentAnimSprite = weaponSprite;
+            currentWeaponAnimSprite = weaponSprite;
         }
 
 
-        currentAnimSprite = updateSprite(currentAnimSprite);
+        currentWeaponAnimSprite = updateSprite(currentWeaponAnimSprite);
 
-        currentAnimSprite.draw(batch);
-
+        currentWeaponAnimSprite.draw(batch);
+        muzzleFlashAnim.getKeyFrame(weaponAnimTimer, true).draw(batch);
         Vector2 weaponCenter = new Vector2(weaponSprite.getX() + weaponSprite.getOriginX(), weaponSprite.getY() + weaponSprite.getOriginY());
 
         muzzleLocation = new Vector2(weaponCenter).add(muzzleOffset).rotateAroundDeg(weaponCenter, angle);
@@ -113,6 +127,13 @@ public class Kar98kWeapon extends Weapon {
         Bullet bullet = new Bullet(damage, muzzleLocationMeters, direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;
+    }
+
+    private Sprite muzzleFlashSpriteUpdate(Sprite sprite) {
+        sprite.setRotation(angle);
+        sprite.setCenter(muzzleLocation.x, muzzleLocation.y);
+
+        return sprite;
     }
 
     private Sprite initializeSprite(Sprite sprite) {
