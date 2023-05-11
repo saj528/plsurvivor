@@ -3,6 +3,7 @@ package com.mygdx.panzerliedsurvivor.utils;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.panzerliedsurvivor.components.FloatingText;
@@ -43,6 +44,8 @@ public class GameComponentProvider {
 
     private static TextWriter textWriter;
 
+    private static ShapeRenderer shapeRenderer;
+
     public static World getGameWorld() {
 
         if (gameWorld == null) {
@@ -82,6 +85,13 @@ public class GameComponentProvider {
             textWriter = new TextWriter();
         }
         return textWriter;
+    }
+
+    public static ShapeRenderer getShapeRenderer() {
+        if (shapeRenderer == null) {
+            shapeRenderer = new ShapeRenderer();
+        }
+        return shapeRenderer;
     }
 
     public static Set<Bullet> getBullets() {

@@ -20,6 +20,7 @@ import com.mygdx.panzerliedsurvivor.components.FloatingText;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 import com.mygdx.panzerliedsurvivor.weapons.Bullet;
+import com.mygdx.panzerliedsurvivor.weapons.Kar98kWeapon;
 
 import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerBoxBody;
 import static com.mygdx.panzerliedsurvivor.utils.Box2DBodyIntializer.createPlayerCircleBody;
@@ -42,8 +43,8 @@ public class GameScreen implements Screen {
     Player player;
 
     private final float playerSize = 16;
-    private final float WORLD_WIDTH = playerSize * 25;
-    private final float WORLD_HEIGHT = playerSize * 25;
+    private final float WORLD_WIDTH = playerSize * 20;
+    private final float WORLD_HEIGHT = playerSize * 20;
     private static final float CAMERA_LERP_SPEED = 0.1f;
     int mapPixelWidth;
     int mapPixelHeight;
@@ -61,7 +62,7 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
 
-        shapeRenderer = new ShapeRenderer();
+        shapeRenderer = GameComponentProvider.getShapeRenderer();
 
         box2DDebugRenderer = new Box2DDebugRenderer();
 
@@ -76,8 +77,6 @@ public class GameScreen implements Screen {
         spriteProcessor = new SpriteProcessor();
 
         batch = GameComponentProvider.getSpriteBatch();
-
-
 
         map = new TmxMapLoader().load("maps/map01.tmx");
 
@@ -144,6 +143,8 @@ public class GameScreen implements Screen {
         batch.begin();
 
         player.renderAndUpdate(delta);
+
+
 
         for (Bullet b : GameComponentProvider.getBullets()) {
             b.update(delta);

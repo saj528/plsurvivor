@@ -26,17 +26,11 @@ public class Player {
     private SpriteBatch batch;
     private SpriteProcessor spriteProcessor;
 
-    //private Rectangle playerBoundingBox;
-
     private float walkingTimer;
 
     private Animation<TextureRegion> currentAnimation;
 
     private String direction;
-
-    private MapObjects mapObjects;
-
-    private Rectangle playerUseBox;
 
     private Body playerBody;
 
@@ -50,8 +44,6 @@ public class Player {
 
         this.spriteProcessor = spriteProcessor;
 
-        this.mapObjects = mapObjects;
-
         this.playerBody = playerBody;
 
         currentAnimation = spriteProcessor.getAnimations().get("playerWalkingDown");
@@ -60,7 +52,7 @@ public class Player {
         walkingTimer = 0;
 
         weapons = new ArrayList<>();
-        Weapon.addWeapon(Weapon.WeaponType.M1911, this);
+        Weapon.addWeapon(Weapon.WeaponType.Kar98k, this);
         //Weapon.addWeapon(Weapon.WeaponType.SpreadWeapon, this);
         //Weapon.addWeapon(Weapon.WeaponType.Mp40, this);
 
@@ -74,6 +66,7 @@ public class Player {
 
         for (Weapon weapon : weapons) {
             weapon.update(delta);
+            weapon.render(delta, batch);
         }
 
     }
@@ -85,7 +78,7 @@ public class Player {
             isPlayerUsing = true;
         }
 
-        float speed = 10f;
+        float speed = 3f;
 
         int horizontalForce = 0;
         int verticalForce = 0;
@@ -143,10 +136,6 @@ public class Player {
 
     public Body getPlayerBody() {
         return playerBody;
-    }
-
-    public Rectangle getPlayerUseBox() {
-        return playerUseBox;
     }
 
     public boolean isPlayerUsing() {
