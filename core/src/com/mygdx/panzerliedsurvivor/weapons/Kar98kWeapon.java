@@ -49,7 +49,6 @@ public class Kar98kWeapon extends Weapon {
 
         weaponAnimTimer = 0;
         muzzleAnimTimer = 0;
-
         muzzleLocation = new Vector2();
 
     }
@@ -75,24 +74,30 @@ public class Kar98kWeapon extends Weapon {
             for (Sprite tempSprite : muzzleFlashAnim.getKeyFrames()) {
                 tempSprite.setRotation(angle);
                 tempSprite.setCenter(muzzleLocation.x, muzzleLocation.y);
+                muzzleAnimTimer = 0;
             }
 
-            if (!muzzleFlashAnim.isAnimationFinished(muzzleAnimTimer)) {
-                muzzleFlashAnim.getKeyFrame(muzzleAnimTimer).draw(batch);
-            }
+            muzzleFiring = true;
 
             if (kar98kFiringAnim.isAnimationFinished(weaponAnimTimer)) {
                 firing = false;
             }
+
         } else {
             currentWeaponAnimSprite = weaponSprite;
         }
 
-
         currentWeaponAnimSprite = updateSprite(currentWeaponAnimSprite);
 
         currentWeaponAnimSprite.draw(batch);
-        //muzzleFlashAnim.getKeyFrame(weaponAnimTimer, true).draw(batch);
+        if (muzzleFiring) {
+            muzzleFlashAnim.getKeyFrame(muzzleAnimTimer, false).draw(batch);
+            if (muzzleFlashAnim.isAnimationFinished(muzzleAnimTimer)) {
+                muzzleFiring = false;
+            }
+        }
+
+
         Vector2 weaponCenter = new Vector2(weaponSprite.getX() + weaponSprite.getOriginX(), weaponSprite.getY() + weaponSprite.getOriginY());
 
         muzzleLocation = new Vector2(weaponCenter).add(muzzleOffset).rotateAroundDeg(weaponCenter, angle);

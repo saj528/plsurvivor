@@ -78,7 +78,7 @@ public class Player {
             isPlayerUsing = true;
         }
 
-        float speed = 10f;
+        float speed = 3f;
 
         int horizontalForce = 0;
         int verticalForce = 0;
