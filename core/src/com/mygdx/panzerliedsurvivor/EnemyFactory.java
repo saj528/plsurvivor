@@ -3,6 +3,7 @@ package com.mygdx.panzerliedsurvivor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
+import com.mygdx.panzerliedsurvivor.utils.CameraUtils;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 import java.util.HashSet;
@@ -41,20 +42,23 @@ public class EnemyFactory {
 
         if (currentRandomInt == 0) {
             spawnerX = camera.position.x + camera.viewportWidth;
-            spawnerY = camera.position.y;
+            spawnerY = camera.position.y + (random.nextFloat(camera.viewportHeight) - (camera.viewportHeight / 2));
         } else if (currentRandomInt == 1) {
             spawnerX = camera.position.x - camera.viewportWidth;
-            spawnerY = camera.position.y;
+            spawnerY = camera.position.y + (random.nextFloat(camera.viewportHeight) - (camera.viewportHeight / 2));
         } else if (currentRandomInt == 2) {
-            spawnerX = camera.position.x;
+            spawnerX = camera.position.x + (random.nextFloat(camera.viewportWidth) - (camera.viewportWidth / 2));
             spawnerY = camera.position.y + camera.viewportHeight;
         } else if (currentRandomInt == 3) {
-            spawnerX = camera.position.x;
+            spawnerX = camera.position.x + (random.nextFloat(camera.viewportWidth) - (camera.viewportWidth / 2));
             spawnerY = camera.position.y - camera.viewportHeight;
         }
 
-        if (counter >= spawnRateSeconds & enemyCount > 0) {
-            Enemy.createEnemy(type, Math.max(10, Math.min(spawnerX, mapWidthPixels - 10)), Math.max(10, Math.min(spawnerY, mapHeightPixels - 10)));
+        spawnerX = Math.max(10, Math.min(spawnerX, mapWidthPixels - 10));
+        spawnerY = Math.max(10, Math.min(spawnerY, mapHeightPixels - 10));
+
+        if (counter >= spawnRateSeconds && enemyCount > 0 && !CameraUtils.isPointOnScreen(spawnerX, spawnerY)) {
+            Enemy.createEnemy(type, spawnerX, spawnerY);
             enemyCount--;
             counter = 0;
         }
