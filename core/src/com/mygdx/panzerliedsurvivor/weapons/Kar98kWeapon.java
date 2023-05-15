@@ -32,9 +32,9 @@ public class Kar98kWeapon extends Weapon {
 
 
     public Kar98kWeapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
-                        float reloadSpeed, float range, float projectileDurability, Player player,
+                        float reloadSpeed, float range, float projectileDurability,
                         float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
-        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
+        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability
                 , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
 
         //weapon sprite initialization
@@ -59,12 +59,12 @@ public class Kar98kWeapon extends Weapon {
 
         weaponAnimTimer += delta;
         muzzleAnimTimer += delta;
-        Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(player.getPlayerBody().getPosition(), range);
+        Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(soldier.getPlayer().getPlayerBody().getPosition(), range);
 
         if (enemy == null) {
             angle = 0;
         } else {
-            angle = player.getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
+            angle = soldier.getPlayer().getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
         }
 
         if (firing) {
@@ -123,7 +123,7 @@ public class Kar98kWeapon extends Weapon {
 
     private void fire() {
 
-        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.player.getPlayerBody().getPosition(), range);
+        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.soldier.getPlayer().getPlayerBody().getPosition(), range);
         if (target == null)
             return;
         firing = true;
@@ -145,7 +145,6 @@ public class Kar98kWeapon extends Weapon {
 
         sprite.scale(weaponTextureScale);
         sprite.setOrigin((weaponSprite.getWidth() * originX), originY);
-        sprite.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
 
         return sprite;
     }
@@ -163,7 +162,7 @@ public class Kar98kWeapon extends Weapon {
             muzzleOffset.y = 1;
             weaponOffsetX = 10;
         }
-        sprite.setCenter((player.getPlayerBody().getPosition().x * PPM) - weaponOffsetX, (player.getPlayerBody().getPosition().y * PPM) - weaponOffsetY);
+        sprite.setCenter((soldier.getPlayer().getPlayerBody().getPosition().x * PPM) - weaponOffsetX, (soldier.getPlayer().getPlayerBody().getPosition().y * PPM) - weaponOffsetY);
 
         return sprite;
     }

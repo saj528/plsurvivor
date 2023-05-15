@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.math.Matrix3;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
+import com.mygdx.panzerliedsurvivor.soldiers.Soldier;
 import com.mygdx.panzerliedsurvivor.weapons.Weapon;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class Player {
 
     private boolean isPlayerUsing = false;
 
-    private ArrayList<Weapon> weapons;
+    private ArrayList<Soldier> soldiers;
 
     public Player(SpriteBatch batch, SpriteProcessor spriteProcessor, MapObjects mapObjects, Body playerBody) {
 
@@ -51,8 +49,10 @@ public class Player {
 
         walkingTimer = 0;
 
-        weapons = new ArrayList<>();
-        Weapon.addWeapon(Weapon.WeaponType.Kar98k, this);
+
+        soldiers = new ArrayList<>();
+        addSoldier(Soldier.generateRandomSoldier());
+        soldiers.get(0).setWeapon(Weapon.createWeapon(Weapon.WeaponType.Kar98k));
         //Weapon.addWeapon(Weapon.WeaponType.SpreadWeapon, this);
         //Weapon.addWeapon(Weapon.WeaponType.Mp40, this);
 
@@ -60,13 +60,18 @@ public class Player {
         this.maxHitpoints = 10;
     }
 
+    public void addSoldier(Soldier soldier) {
+        soldier.setPlayer(this);
+        this.soldiers.add(soldier);
+    }
+
     public void renderAndUpdate(float delta) {
         walkingTimer += delta;
         batch.draw(currentAnimation.getKeyFrame(walkingTimer, true), playerBody.getPosition().x * PPM - 8, playerBody.getPosition().y * PPM - 16);
 
-        for (Weapon weapon : weapons) {
-            weapon.update(delta);
-            weapon.render(delta, batch);
+        for (Soldier soldier : soldiers) {
+            soldier.getWeapon().update(delta);
+            soldier.getWeapon().render(delta, batch);
         }
 
     }
@@ -110,8 +115,14 @@ public class Player {
                 currentAnimation = spriteProcessor.getAnimations().get("playerIdleLeft");
             }
         }
-        playerBody.setLinearVelocity(new Vector2(horizontalForce * speed, verticalForce * speed));
 
+        float finalSpeed = speed * calculateSpeedModifier();
+        playerBody.setLinearVelocity(new Vector2(horizontalForce * finalSpeed, verticalForce * finalSpeed));
+
+    }
+
+    private float calculateSpeedModifier() {
+        return soldiers.stream().map(Soldier::getMoveSpeed).reduce(1f, (a, b) -> a * b);
     }
 
     public void kill() {
@@ -146,11 +157,4 @@ public class Player {
         isPlayerUsing = playerUsing;
     }
 
-    public ArrayList<Weapon> getWeapons() {
-        return weapons;
-    }
-
-    public void setWeapons(ArrayList<Weapon> weapons) {
-        this.weapons = weapons;
-    }
 }

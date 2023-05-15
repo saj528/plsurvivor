@@ -16,8 +16,8 @@ public class SpreadWeapon extends Weapon {
     public SpreadWeapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
                         float reloadSpeed, float range, float projectileDurability, Player player,
                         float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
-        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
-                , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
+        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability,
+                weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
     }
 
     @Override
@@ -43,14 +43,14 @@ public class SpreadWeapon extends Weapon {
     }
 
     private void fire() {
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, 0), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet1 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, 0), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet2 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(0, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet3 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(0, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet4 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet5 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet6 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(1, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
-        Bullet bullet7 = new Bullet(damage, player.getPlayerBody().getPosition(), new Vector2(-1, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(-1, 0), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet1 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(1, 0), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet2 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(0, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet3 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(0, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet4 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(-1, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet5 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(1, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet6 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(1, 1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet7 = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), new Vector2(-1, -1), projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         addBullet(bullet);
         addBullet(bullet1);
         addBullet(bullet2);

@@ -2,10 +2,9 @@ package com.mygdx.panzerliedsurvivor.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.panzerliedsurvivor.Player;
 import com.mygdx.panzerliedsurvivor.components.Timer;
+import com.mygdx.panzerliedsurvivor.soldiers.Soldier;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
 public abstract class Weapon {
@@ -34,13 +33,13 @@ public abstract class Weapon {
 
     float projectileDurability;
 
-    Player player;
+    Soldier soldier;
 
     float weaponTextureScale, originX, originY;
     int weaponOffsetX, weaponOffsetY;
     Vector2 muzzleOffset;
 
-    public static Weapon addWeapon(WeaponType weaponType, Player player) {
+    public static Weapon createWeapon(WeaponType weaponType) {
         Weapon weapon;
 
         float attackSpeed;
@@ -58,7 +57,7 @@ public abstract class Weapon {
                 attackSpeed = 2f;
                 damage = 3;
                 magSize = 7;
-                reloadSpeed = 2.5f;
+                reloadSpeed = 1.5f;
                 projectileDurability = 2;
                 projectileSpeed = 0.2f;
                 range = 6f;
@@ -69,7 +68,7 @@ public abstract class Weapon {
                 muzzleOffset = new Vector2(-15, 0);
                 weaponOffsetX = 0;
                 weaponOffsetY = 4;
-                weapon = new M1911Weapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player,
+                weapon = new M1911Weapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability,
                         weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
                 break;
             /*case Mp40:
@@ -81,7 +80,7 @@ public abstract class Weapon {
                 projectileSpeed = 0.2f;
                 range = 8f;
                 weaponSprite = null;
-                weapon = new Mp40Weapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player);
+                weapon = new Mp40Weapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability);
                 break;
             case SpreadWeapon:
                 attackSpeed = 3f;
@@ -91,15 +90,15 @@ public abstract class Weapon {
                 projectileDurability = 2;
                 projectileSpeed = 0.1f;
                 weaponSprite = null;
-                weapon = new SpreadWeapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, projectileDurability, player);
+                weapon = new SpreadWeapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, projectileDurability);
                 break;*/
             case Kar98k:
                 attackSpeed = 2f;
-                damage = 3;
-                magSize = 7;
+                damage = 10;
+                magSize = 5;
                 reloadSpeed = 2.5f;
-                projectileDurability = 2;
-                projectileSpeed = 0.2f;
+                projectileDurability = 4;
+                projectileSpeed = .5f;
                 range = 6f;
                 weaponSprite = new Sprite(GameComponentProvider.getSpriteProcessor().getMiscTextureRegions().get("kar98k"));
                 weaponTextureScale = -.3f;
@@ -108,18 +107,16 @@ public abstract class Weapon {
                 muzzleOffset = new Vector2(-25, 0);
                 weaponOffsetX = 10;
                 weaponOffsetY = 4;
-                weapon = new Kar98kWeapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player,
+                weapon = new Kar98kWeapon(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability,
                         weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
                 break;
         }
-
-        player.getWeapons().add(weapon);
 
         return weapon;
     }
 
     public Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage,
-                  int magSize, float reloadSpeed, float range, float projectileDurability, Player player,
+                  int magSize, float reloadSpeed, float range, float projectileDurability,
                   float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
         this.attackTimer = new Timer(attackSpeed);
         this.projectileSpeed = projectileSpeed;
@@ -130,7 +127,6 @@ public abstract class Weapon {
         this.reloadTimer = new Timer(reloadSpeed);
         this.range = range;
         this.projectileDurability = projectileDurability;
-        this.player = player;
         this.weaponTextureScale = weaponTextureScale;
         this.originX = originX;
         this.originY = originY;
@@ -143,6 +139,11 @@ public abstract class Weapon {
 
     public abstract void render(float delta, SpriteBatch batch);
 
+    public Soldier getSoldier() {
+        return soldier;
+    }
 
-
+    public void setSoldier(Soldier soldier) {
+        this.soldier = soldier;
+    }
 }

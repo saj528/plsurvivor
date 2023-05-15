@@ -22,8 +22,8 @@ public class Mp40Weapon extends Weapon {
     public Mp40Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
                       float reloadSpeed, float range, float projectileDurability, Player player,
                       float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
-        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
-                , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
+        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability,
+                weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
     }
 
     @Override
@@ -49,16 +49,16 @@ public class Mp40Weapon extends Weapon {
     }
 
     private void fire() {
-        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.player.getPlayerBody().getPosition(), range);
+        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.soldier.getPlayer().getPlayerBody().getPosition(), range);
         if (target == null)
             return;
-        Vector2 direction = target.getBody().getPosition().sub(player.getPlayerBody().getPosition()).nor().scl(projectileSpeed);
+        Vector2 direction = target.getBody().getPosition().sub(soldier.getPlayer().getPlayerBody().getPosition()).nor().scl(projectileSpeed);
 
         float deviation = random.nextFloat(2 * this.deviation) - this.deviation;
 
         direction = direction.rotateDeg(deviation);
 
-        Bullet bullet = new Bullet(damage, player.getPlayerBody().getPosition(), direction, projectileSpeed,projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
+        Bullet bullet = new Bullet(damage, soldier.getPlayer().getPlayerBody().getPosition(), direction, projectileSpeed,projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
     }
 }

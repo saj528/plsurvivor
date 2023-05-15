@@ -18,17 +18,17 @@ public class M1911Weapon extends Weapon {
     Vector2 muzzleLocation;
 
     public M1911Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
-                       float reloadSpeed, float range, float projectileDurability, Player player,
-                       float weaponTextureScale, float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
-        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability, player
-                , weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
+                       float reloadSpeed, float range, float projectileDurability, float weaponTextureScale,
+                       float originX, float originY, Vector2 muzzleOffset, int weaponOffsetX, int weaponOffsetY) {
+        super(attackSpeed, projectileSpeed, weaponSprite, damage, magSize, reloadSpeed, range, projectileDurability,
+                weaponTextureScale, originX, originY, muzzleOffset, weaponOffsetX, weaponOffsetY);
 
         //weapon sprite initialization
 
         weaponSprite.setOriginCenter();
         weaponSprite.scale(weaponTextureScale);
         weaponSprite.setOrigin((weaponSprite.getWidth() * originX), originY);
-        weaponSprite.setPosition(player.getPlayerBody().getPosition().x * PPM, player.getPlayerBody().getPosition().y * PPM);
+        weaponSprite.setPosition(soldier.getPlayer().getPlayerBody().getPosition().x * PPM, soldier.getPlayer().getPlayerBody().getPosition().y * PPM);
 
         muzzleLocation = new Vector2();
 
@@ -38,12 +38,12 @@ public class M1911Weapon extends Weapon {
     @Override
     public void render(float delta, SpriteBatch batch) {
 
-        Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(player.getPlayerBody().getPosition(), range);
+        Enemy enemy = EnemyUtils.getNearestEnemyWithinRange(soldier.getPlayer().getPlayerBody().getPosition(), range);
 
         if (enemy == null) {
             angle = 0;
         } else {
-            angle = player.getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
+            angle = soldier.getPlayer().getPlayerBody().getPosition().sub(enemy.getBody().getPosition()).angleDeg();
         }
 
         weaponSprite.setRotation(angle);
@@ -58,7 +58,7 @@ public class M1911Weapon extends Weapon {
             muzzleOffset.y = 2;
             weaponOffsetX = 20;
         }
-        weaponSprite.setCenter((player.getPlayerBody().getPosition().x * PPM) - weaponOffsetX, (player.getPlayerBody().getPosition().y * PPM) - weaponOffsetY);
+        weaponSprite.setCenter((soldier.getPlayer().getPlayerBody().getPosition().x * PPM) - weaponOffsetX, (soldier.getPlayer().getPlayerBody().getPosition().y * PPM) - weaponOffsetY);
 
         weaponSprite.draw(batch);
 
@@ -87,7 +87,7 @@ public class M1911Weapon extends Weapon {
     }
 
     private void fire() {
-        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.player.getPlayerBody().getPosition(), range);
+        Enemy target = EnemyUtils.getNearestEnemyWithinRange(this.soldier.getPlayer().getPlayerBody().getPosition(), range);
         if (target == null)
             return;
         Vector2 muzzleLocationMeters = new Vector2(muzzleLocation).scl(1 / PPM);
