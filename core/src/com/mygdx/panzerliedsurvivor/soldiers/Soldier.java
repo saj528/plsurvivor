@@ -32,10 +32,10 @@ public class Soldier {
         soldier.firstName = random.nextInt(2) == 0 ? "John" : "Little Stevie";
         soldier.lastName = random.nextInt(2) == 0 ? "Ammirati" : "Joiner";
 
-        soldier.moveSpeed = random.nextFloat(2) + 0.5f;
-        soldier.accuracy = random.nextFloat(2) + 0.5f;
-        soldier.reloadSpeed = random.nextFloat(2) + 0.5f;
-        soldier.damageModifier = random.nextFloat(2) + 0.5f;
+        soldier.moveSpeed = random.nextFloat(1) + 0.5f;
+        soldier.accuracy = random.nextFloat(1) + 0.5f;
+        soldier.reloadSpeed = random.nextFloat(1) + 0.5f;
+        soldier.damageModifier = random.nextFloat(1) + 0.5f;
 
         soldier.nationality = Nationality.values()[random.nextInt(Nationality.values().length)];
 

@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.panzerliedsurvivor.Player;
 import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.EnemyUtils;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
+
+import java.util.Random;
 
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.getSpriteProcessor;
@@ -21,6 +22,11 @@ public class Kar98kWeapon extends Weapon {
 
     Animation<Sprite> kar98kFiringAnim = GameComponentProvider.getSpriteProcessor().getSpriteAnimations().get("kar98kFiring");
     Animation<Sprite> muzzleFlashAnim = GameComponentProvider.getSpriteProcessor().getSpriteAnimations().get("muzzleFlash");
+
+    float deviation = 0f;
+
+    Random random = new Random();
+
 
     float weaponAnimTimer;
     float muzzleAnimTimer;
@@ -129,6 +135,13 @@ public class Kar98kWeapon extends Weapon {
         firing = true;
         Vector2 muzzleLocationMeters = new Vector2(muzzleLocation).scl(1 / PPM);
         Vector2 direction = target.getBody().getPosition().sub(muzzleLocationMeters).nor().scl(projectileSpeed);
+
+        float modifiedDeviation = this.deviation / soldier.getAccuracy();
+
+        float deviation = modifiedDeviation == 0 ? 0 : random.nextFloat(2 * modifiedDeviation) - modifiedDeviation;
+
+        direction = direction.rotateDeg(deviation);
+
         Bullet bullet = new Bullet(damage, muzzleLocationMeters, direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;

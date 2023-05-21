@@ -8,6 +8,8 @@ import com.mygdx.panzerliedsurvivor.enemies.Enemy;
 import com.mygdx.panzerliedsurvivor.utils.EnemyUtils;
 import com.mygdx.panzerliedsurvivor.utils.GameComponentProvider;
 
+import java.util.Random;
+
 import static com.mygdx.panzerliedsurvivor.utils.Constants.PPM;
 import static com.mygdx.panzerliedsurvivor.utils.GameComponentProvider.getSpriteProcessor;
 
@@ -15,7 +17,12 @@ public class M1911Weapon extends Weapon {
 
     float angle;
 
+    float deviation = 4f;
+
     Vector2 muzzleLocation;
+
+    Random random = new Random();
+
 
     public M1911Weapon(float attackSpeed, float projectileSpeed, Sprite weaponSprite, int damage, int magSize,
                        float reloadSpeed, float range, float projectileDurability, float weaponTextureScale,
@@ -92,6 +99,11 @@ public class M1911Weapon extends Weapon {
             return;
         Vector2 muzzleLocationMeters = new Vector2(muzzleLocation).scl(1 / PPM);
         Vector2 direction = target.getBody().getPosition().sub(muzzleLocationMeters).nor().scl(projectileSpeed);
+
+        float modifiedDeviation = this.deviation / soldier.getAccuracy();
+        float deviation = modifiedDeviation == 0 ? 0 : random.nextFloat(2 * modifiedDeviation) - modifiedDeviation;
+        direction = direction.rotateDeg(deviation);
+
         Bullet bullet = new Bullet(damage, muzzleLocationMeters, direction, projectileSpeed, projectileDurability, getSpriteProcessor().getMiscTextureRegions().get("bullet"));
         GameComponentProvider.addBullet(bullet);
         currentAmmo--;

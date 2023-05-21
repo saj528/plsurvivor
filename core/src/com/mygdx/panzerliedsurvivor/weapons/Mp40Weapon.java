@@ -54,7 +54,9 @@ public class Mp40Weapon extends Weapon {
             return;
         Vector2 direction = target.getBody().getPosition().sub(soldier.getPlayer().getPlayerBody().getPosition()).nor().scl(projectileSpeed);
 
-        float deviation = random.nextFloat(2 * this.deviation) - this.deviation;
+        float modifiedDeviation = this.deviation / soldier.getAccuracy();
+
+        float deviation = modifiedDeviation == 0 ? 0 : random.nextFloat(2 * modifiedDeviation) - modifiedDeviation;
 
         direction = direction.rotateDeg(deviation);
 
